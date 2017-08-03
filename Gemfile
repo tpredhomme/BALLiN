@@ -20,7 +20,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'haml'
-gem 'font-awesome-rails', '4.7.0.2', github: 'bokmann/font-awesome-rails'
+# gem 'font-awesome-rails', '4.7.0.2', github: 'bokmann/font-awesome-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
