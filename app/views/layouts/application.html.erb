@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ballin</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'navbar-top' %>
+
+    <div class="container">
+        <div class="wrapper mt-5">
+          <%= notice %>
+          <%= alert %>
+
+          <%= yield %>
+        </div>
+      <%= render 'navbar-bottom' %>
+
+    </div>
+  </body>
+</html>

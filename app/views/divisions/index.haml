@@ -1,0 +1,5 @@
+%h1
+	= "Divisions"
+
+- @divisions.each do |division|
+	%p= link_to division.name, division

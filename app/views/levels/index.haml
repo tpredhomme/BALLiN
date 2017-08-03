@@ -1,0 +1,5 @@
+%h1
+	= "Levels"
+
+- @levels.each do |level|
+	%p= link_to level.name, level

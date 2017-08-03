@@ -1,0 +1,14 @@
+%table.table.table-inverse
+  %thead
+    %tr
+      %th #
+      %th Email
+      %th First Name
+      %th Last Name
+  %tbody
+    - @players.each do |player|
+      %tr
+        %th{:scope => "row"}= link_to player.id, player_path(player)
+        %td= player.email
+        %td= player.first_name
+        %td= player.last_name

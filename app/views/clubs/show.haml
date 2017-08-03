@@ -1,0 +1,19 @@
+%p#notice
+	= notice
+
+%p
+	%strong= 'Name:'
+	= @club.name
+
+= link_to 'Edit', edit_club_path(@club)
+= link_to 'Back', clubs_path
+
+- if @club.teams.present?
+	.row
+		.col-12
+			%strong= "Equipes du club"
+			
+			- @club.teams.each do |team|
+				= link_to team.name, team
+
+= link_to "add team in this club", new_team_path(club_id: @club.id)

@@ -1,0 +1,17 @@
+.card
+  .card-block
+    
+    %h4.card-title= 'Teams'
+    %h6.card-subtitle.text-muted.mb-4= "#{@teams.count} teams."
+
+    %table
+      %tbody
+        - @teams.each do |team|
+          %tr
+            %td= link_to fa_icon('eye' ), team
+            %td= link_to fa_icon('edit'), edit_team_path(team)
+            %td= link_to fa_icon('ban' ), team, method: :delete, data: { confirm: 'Are you sure?' }
+            %td= team.name
+
+%br/
+= link_to 'New Team', new_team_path, class: 'btn btn-primary'
