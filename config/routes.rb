@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :players
+  devise_for :players, controllers: { registrations: 'players/registrations' }
 
   resources :clubs
   resources :categories

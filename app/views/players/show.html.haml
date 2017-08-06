@@ -1,6 +1,8 @@
-%h2= "Player ID"
+.card
+	.card-block
+		%h1.card-title= @player.user_name || @player.first_name
+		%h6.card-subtitle= "#{@player.first_name} #{@player.last_name}"
 
-%p= @player.email
-%p= @player.first_name
-%p= @player.last_name
-%p= @player.user_name
+		.card-text
+			%p= @player.email
+			%p= link_to @player.club.name, @player.club 

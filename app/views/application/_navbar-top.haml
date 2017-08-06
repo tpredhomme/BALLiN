@@ -1,4 +1,10 @@
 %nav.navbar.navbar-s1.bg-white
 	.container
-		= link_to root_path, class: 'navbar-brand' do
+		= link_to root_path, class: 'navbar-brand mr-auto' do
 			= image_tag 'logo/logo.png', size: '129x54'
+
+		
+		- if try(:player)
+			.nav-link= link_to player.first_name, destroy_player_session_path, method: :delete
+		- else
+			.nav-link= link_to 'Login', new_player_session_path

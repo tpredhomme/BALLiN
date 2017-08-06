@@ -1,6 +1,17 @@
-.card.text-center
-	.card-block
-		%h4.card-title= 'Special title treatment'
-		%p.card-text= 'With supporting text below as a natural lead-in to additional content.'
+- unless player_signed_in?
 
-		= link_to "Rentrer dans le game.", new_player_registration_path, class: 'btn btn-primary'
+	.card.text-center
+		.card-block
+			%h4.card-title= 'Special title treatment'
+			%p.card-text= 'With supporting text below as a natural lead-in to additional content.'
+
+			= link_to "Rentrer dans le game.", new_player_registration_path, class: 'btn btn-primary'
+
+- else
+	.row
+		- [:clubs, :teams, :players, :categories, :divisions, :groups, :levels].each do |model|
+			.col-md-2
+				= link_to send("#{model.to_s}_path") do
+					.card.card-inverse
+						.card-block
+							= model.capitalize
