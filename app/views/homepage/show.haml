@@ -9,7 +9,7 @@
 
 - else
 	.row
-		- [:clubs, :teams, :players, :categories, :divisions, :groups, :levels].each do |model|
+		- @models.each do |model|
 			.col-md-2
 				= link_to send("#{model.to_s}_path") do
 					.card.card-inverse

@@ -1,0 +1,20 @@
+%p#notice= notice
+
+.card
+  .card-block
+    %h4.card-title= 'Leagues'
+    
+    %table.w-100
+      %thead
+        %tr
+          %th= 'Name'
+          %th{ colspan: '2' }
+
+      %tbody
+        - @leagues.each do |league|
+          %tr
+            %td= link_to league.name, league
+            %td= link_to 'Edit', edit_league_path(league)
+            %td= link_to 'Destroy', league, method: :delete, data: { confirm: 'Are you sure?' }
+
+    = link_to 'New League', new_league_path, class: 'btn btn-primary btn-block mt-5'

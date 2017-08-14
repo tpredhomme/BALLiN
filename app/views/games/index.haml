@@ -1,0 +1,20 @@
+%p#notice= notice
+
+.card
+  .card-block
+    %h4.card-title= 'Games'
+    
+    %table.w-100
+      %thead
+        %tr
+          %th= 'Name'
+          %th{ colspan: '2' }
+
+      %tbody
+        - @games.each do |game|
+          %tr
+            %td= link_to game.name, game
+            %td= link_to 'Edit', edit_game_path(game)
+            %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
+
+    = link_to 'New game', new_game_path, class: 'btn btn-primary btn-block mt-5'

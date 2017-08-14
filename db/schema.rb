@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806121508) do
+ActiveRecord::Schema.define(version: 20170814082124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,12 @@ ActiveRecord::Schema.define(version: 20170806121508) do
     t.string   "name",       limit: 50, default: "", null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+  end
+
+  create_table "calendars", force: :cascade do |t|
+    t.string   "saison"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "campaign_brief_assets", id: :bigserial, force: :cascade do |t|
@@ -203,6 +209,7 @@ ActiveRecord::Schema.define(version: 20170806121508) do
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
     t.index ["attached_id", "attached_type"], name: "index_crawler_attachments_on_attached_id_and_attached_type", using: :btree
+    t.index ["attached_type", "attached_id", "attached_source", "url_source"], name: "unique_crawler_attachment", unique: true, using: :btree
     t.index ["fetched_at"], name: "index_crawler_attachments_on_fetched_at", using: :btree
   end
 
@@ -253,7 +260,19 @@ ActiveRecord::Schema.define(version: 20170806121508) do
     t.index ["user_account_id"], name: "index_crawlers_log_user_accounts_on_user_account_id", using: :btree
   end
 
+  create_table "days", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "divisions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -273,6 +292,12 @@ ActiveRecord::Schema.define(version: 20170806121508) do
     t.bigint   "invitee_id"
     t.string   "message"
     t.index ["inviter_id"], name: "index_invitations_on_inviter_id", using: :btree
+  end
+
+  create_table "leagues", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "levels", force: :cascade do |t|
@@ -659,9 +684,11 @@ ActiveRecord::Schema.define(version: 20170806121508) do
     t.integer  "level_id"
     t.integer  "division_id"
     t.integer  "group_id"
+    t.integer  "game_id"
     t.index ["category_id"], name: "index_teams_on_category_id", using: :btree
     t.index ["club_id"], name: "index_teams_on_club_id", using: :btree
     t.index ["division_id"], name: "index_teams_on_division_id", using: :btree
+    t.index ["game_id"], name: "index_teams_on_game_id", using: :btree
     t.index ["group_id"], name: "index_teams_on_group_id", using: :btree
     t.index ["level_id"], name: "index_teams_on_level_id", using: :btree
   end
@@ -814,6 +841,7 @@ ActiveRecord::Schema.define(version: 20170806121508) do
 
   add_foreign_key "teams", "categories"
   add_foreign_key "teams", "divisions"
+  add_foreign_key "teams", "games"
   add_foreign_key "teams", "groups"
   add_foreign_key "teams", "levels"
 end
