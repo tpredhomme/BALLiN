@@ -1,9 +1,11 @@
-%nav.navbar.fixed-bottom.navbar-dark.bg-black
-	.d-flex.justify-content-between
-		= link_to fa_icon('home'), "#", class: 'navbar-brand my-auto'
-		= link_to fa_icon('futbol-o'), "#", class: 'navbar-brand my-auto'
+- if player
 
-		= link_to fa_icon('user-o 2x'), player, class: 'navbar-brand my-auto'
+	%nav.navbar.navbar-s2.fixed-bottom
+		.d-flex.justify-content-between
+			= link_to fa_icon('user'), player, class: 'navbar-brand my-auto'
+			= link_to fa_icon('calendar'), calendars_path, class: 'navbar-brand my-auto'
 
-		= link_to fa_icon('bell'), "#", class: 'navbar-brand my-auto'
-		= link_to fa_icon('list-ol'), "#", class: 'navbar-brand my-auto'
+			= link_to fa_icon('trophy 2x'), League.find(1), class: 'navbar-brand my-auto'
+
+			= link_to fa_icon('users'), player.club, class: 'navbar-brand my-auto'
+			= link_to fa_icon('list-ol'), "#", class: 'navbar-brand my-auto'

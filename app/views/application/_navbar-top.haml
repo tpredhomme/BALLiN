@@ -10,6 +10,6 @@
 			.nav-item
 				- klass = 'nav-link btn btn-outline-primary'
 				- if try(:player)
-					= link_to player.first_name, destroy_player_session_path, method: :delete, class: klass
+					= link_to fa_icon('cog'), destroy_player_session_path, method: :delete, class: klass
 				- else
-					= link_to 'Login', new_player_session_path, class: klass
+					= link_to fa_icon('sign-in'), new_player_session_path, class: klass

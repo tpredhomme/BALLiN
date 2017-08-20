@@ -6,6 +6,9 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+
+    @team_ext = @game.teams.first
+    @team_dom = @game.teams.second
   end
 
   def new

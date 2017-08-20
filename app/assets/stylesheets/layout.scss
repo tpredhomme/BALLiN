@@ -1,13 +1,10 @@
 body {
-    background-color: $brand-secondary;
+    // background: url('background/homepage.jpg');
+    // background-position: 50% 20%;
 }
 
 .row {
     margin-bottom: 3rem;
-}
-
-.card {
-    margin-bottom: 1.5rem;   
 }
 
 .wrapper {
@@ -19,4 +16,12 @@ body {
     background: black;
     text-align: center;
     padding:    0;
+}
+
+.navbar-s2 {
+    background:     $primary;
+    opacity:        0.9;
+    padding-left:   10%;
+    padding-right:  10%;
+    a { color:      $secondary; }
 }

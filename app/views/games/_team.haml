@@ -1,0 +1,5 @@
+%h4= team.name
+%h6= team.club.name
+
+- team.players.each do |player|
+	%p= player.first_name

@@ -2,7 +2,7 @@
 	.card-block
 		
 		%h1.card-title= @team.name
-		%h6.card-subtitle.text-muted.mb-4= @team.club.name
+		%h6.card-subtitle.text-muted.mb-4= link_to @team.club.name, @team.club
 
 		%p
 			%strong= 'Category:'
@@ -20,6 +20,13 @@
 			%strong= 'Group:'
 			= @team.group.name
 
-%br/
-= link_to 'Edit', edit_team_path(@team), class: 'btn btn-primary'
-= link_to 'Back', teams_path, class: 'btn btn-secondary'
+		= link_to 'Edit', edit_team_path(@team), class: 'btn btn-primary'
+		= link_to 'Back', teams_path, class: 'btn btn-secondary'
+
+.card
+	.card-block
+		%h4.card-title= 'Players'
+
+		- @players.each do |player|
+			%p
+				= link_to player.full_name, player

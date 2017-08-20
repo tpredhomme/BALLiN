@@ -1,8 +1,11 @@
-.card
+.card.text-center
 	.card-block
-		%h1.card-title= @player.user_name || @player.first_name
-		%h6.card-subtitle= "#{@player.first_name} #{@player.last_name}"
+		%h1.card-title= @player.full_name
+		%h6.card-subtitle= @player.user_name
 
 		.card-text
 			%p= @player.email
-			%p= link_to @player.club.name, @player.club 
+			%p
+				= link_to @player.club.name, @player.club
+				= '-'
+				= link_to @player.team.name, @player.team

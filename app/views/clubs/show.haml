@@ -28,4 +28,5 @@
 				.card-block
 					%h4.card-title= "Joueurs du club (#{@players.count})"
 					- @players.each do |player|
-						= link_to player_full_name(player), player
+						= link_to player.full_name, player
+						= link_to player.team.name, player.team

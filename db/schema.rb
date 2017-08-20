@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814082124) do
+ActiveRecord::Schema.define(version: 20170814140911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -654,9 +654,11 @@ ActiveRecord::Schema.define(version: 20170814082124) do
     t.string   "last_name"
     t.string   "user_name"
     t.integer  "club_id"
+    t.integer  "team_id"
     t.index ["club_id"], name: "index_players_on_club_id", using: :btree
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
+    t.index ["team_id"], name: "index_players_on_team_id", using: :btree
   end
 
   create_table "taxonomies", id: :bigserial, force: :cascade do |t|
@@ -839,6 +841,7 @@ ActiveRecord::Schema.define(version: 20170814082124) do
     t.index ["privacy"], name: "index_user_selections_on_privacy", using: :btree
   end
 
+  add_foreign_key "players", "teams"
   add_foreign_key "teams", "categories"
   add_foreign_key "teams", "divisions"
   add_foreign_key "teams", "games"
