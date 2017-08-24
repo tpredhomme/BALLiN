@@ -1,7 +1,7 @@
 #
 class Player < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  before_save :default_values
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -9,6 +9,11 @@ class Player < ApplicationRecord
   belongs_to :club
 
   def full_name
-  	"#{self.first_name} #{self.last_name} "
+    "#{first_name} #{last_name} "
+  end
+
+  # One team/club tournament configuration
+  def default_values
+    self.team_id = 1
   end
 end

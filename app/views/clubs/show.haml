@@ -3,30 +3,20 @@
 
 .row
 	.col-12
-		.card
+		.card.text-center
 			.card-block
 				%h1.card-title= @club.name
 
-				= link_to 'Edit', edit_club_path(@club)
-				= link_to 'Back', clubs_path
-
-- if @teams.any?
-	.row
-		.col-12
-			.card
+			- if @teams.any?
 				.card-block
 					%h4.card-title= "Equipes du club (#{@teams.count})"
 					- @teams.each do |team|
 						= link_to team.name, team
 
-				= link_to "add team in this club", new_team_path(club_id: @club.id), class: 'btn btn-primary'
-
-- if @players.any?
-	.row
-		.col-12
-			.card
+			- if @players.any?
 				.card-block
 					%h4.card-title= "Joueurs du club (#{@players.count})"
 					- @players.each do |player|
-						= link_to player.full_name, player
-						= link_to player.team.name, player.team
+						%p
+							= link_to player.full_name, player
+							= link_to "(#{player.team.name})", player.team
