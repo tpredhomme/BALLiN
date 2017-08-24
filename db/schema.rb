@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814140911) do
+ActiveRecord::Schema.define(version: 20170824061024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,41 +19,36 @@ ActiveRecord::Schema.define(version: 20170814140911) do
   enable_extension "uuid-ossp"
 
   create_table "administrators", id: :bigserial, force: :cascade do |t|
-    t.string   "first_name",      null: false
-    t.string   "last_name",       null: false
-    t.string   "email",           null: false
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "first_name",                             null: false
+    t.string   "last_name",                              null: false
+    t.string   "email",                                  null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "locale",                 default: "en",  null: false
+    t.string   "default_currency",       default: "USD", null: false
+    t.index ["confirmation_token"], name: "index_administrators_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_administrators_on_email", using: :btree
-  end
-
-  create_table "async_attachment_upload_jobs", id: :bigserial, force: :cascade do |t|
-    t.bigint   "async_attachment_id",             null: false
-    t.string   "url"
-    t.integer  "retry_count",         default: 0
-    t.datetime "next_retry_at",                   null: false
-    t.index ["async_attachment_id"], name: "index_async_attachment_upload_jobs_on_async_attachment_id", using: :btree
-  end
-
-  create_table "async_attachments", id: :bigserial, force: :cascade do |t|
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-  end
-
-  create_table "blog_topics", id: :bigserial, force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_blog_topics_on_name", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "brand_accounts", id: :bigserial, force: :cascade do |t|
-    t.string   "name",       limit: 50, default: "", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "name",             limit: 50, default: "",    null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "default_currency", limit: 3,  default: "EUR", null: false
+    t.string   "locale",           limit: 5,  default: "en",  null: false
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -62,53 +57,143 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "campaign_brief_assets", id: :bigserial, force: :cascade do |t|
-    t.bigint   "brief_id",                        null: false
-    t.string   "field_name",         default: "", null: false
-    t.string   "asset_file_name",    default: "", null: false
-    t.integer  "asset_file_size",    default: 0,  null: false
-    t.string   "asset_content_type", default: "", null: false
-    t.datetime "asset_updated_at",                null: false
-    t.index ["brief_id"], name: "index_campaign_brief_assets_on_brief_id", using: :btree
-  end
-
   create_table "campaign_briefs", id: :bigserial, force: :cascade do |t|
-    t.bigint   "brand_id",                                              null: false
-    t.string   "status",                  limit: 10,  default: "draft", null: false
-    t.string   "xp_cover",                                              null: false
-    t.string   "xp_logo",                                               null: false
-    t.string   "xp_label",                limit: 100,                   null: false
-    t.text     "xp_description"
-    t.string   "xp_website"
-    t.integer  "xp_people_count"
-    t.float    "xp_amount"
-    t.datetime "xp_start_at",                                           null: false
-    t.datetime "xp_end_at",                                             null: false
-    t.text     "influencer_expectations"
-    t.string   "influencer_hashtags",                                                array: true
+    t.integer  "brand_account_id", default: 0,       null: false
+    t.integer  "validated_by"
+    t.string   "status",           default: "draft", null: false
+    t.string   "label",            default: "",      null: false
+    t.text     "description"
+    t.string   "website"
+    t.jsonb    "logo_asset"
+    t.jsonb    "cover_asset"
     t.datetime "confirmed_at"
     t.datetime "validated_at"
+    t.integer  "users_count_max",  default: 0,       null: false
     t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["brand_id"], name: "index_campaign_briefs_on_brand_id", using: :btree
+    t.index ["brand_account_id", "label"], name: "index_campaign_briefs_on_brand_account_id_and_label", using: :btree
+    t.index ["status"], name: "index_campaign_briefs_on_status", using: :btree
+    t.index ["validated_by"], name: "index_campaign_briefs_on_validated_by", using: :btree
   end
 
-  create_table "campaign_selected_networks", id: :bigserial, force: :cascade do |t|
-    t.bigint "campaign_id",       null: false
-    t.bigint "social_network_id", null: false
-    t.string "xp_at"
-    t.index ["campaign_id", "social_network_id"], name: "campaign_unique_network", unique: true, using: :btree
-    t.index ["campaign_id"], name: "index_campaign_selected_networks_on_campaign_id", using: :btree
-    t.index ["social_network_id"], name: "index_campaign_selected_networks_on_social_network_id", using: :btree
+  create_table "campaign_criterias", id: :bigserial, force: :cascade do |t|
+    t.integer "segment_id",                 default: 0, null: false
+    t.string  "criteria_name"
+    t.jsonb   "criteria_values"
+    t.string  "mapping",         limit: 50
+    t.index ["segment_id"], name: "index_campaign_criterias_on_segment_id", using: :btree
   end
 
-  create_table "campaigns", id: :bigserial, force: :cascade do |t|
-    t.string   "title"
-    t.string   "image_url"
-    t.string   "logo_url"
-    t.datetime "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "campaign_generated_publications", force: :cascade do |t|
+    t.integer "selected_user_id",                                             null: false
+    t.uuid    "network_publication_id", default: -> { "uuid_generate_v4()" }, null: false
+    t.integer "user_account_id",                                              null: false
+    t.integer "network_domain_id",                                            null: false
+    t.index ["network_domain_id"], name: "index_campaign_generated_publications_on_network_domain_id", using: :btree
+    t.index ["network_publication_id"], name: "index_campaign_generated_publications_on_network_publication_id", using: :btree
+    t.index ["selected_user_id"], name: "index_campaign_generated_publications_on_selected_user_id", using: :btree
+    t.index ["user_account_id"], name: "index_campaign_generated_publications_on_user_account_id", using: :btree
+  end
+
+  create_table "campaign_logistic_products", force: :cascade do |t|
+    t.integer "logistic_id",                 default: 0,  null: false
+    t.string  "label",           limit: 100, default: "", null: false
+    t.integer "available_items"
+    t.integer "booked_items",                default: 0,  null: false
+    t.string  "reference"
+    t.integer "items_count",                 default: 1,  null: false
+  end
+
+  create_table "campaign_logistic_slots", force: :cascade do |t|
+    t.integer  "logistic_id",     default: 0, null: false
+    t.integer  "available_items", default: 0, null: false
+    t.integer  "booked_items",    default: 0, null: false
+    t.integer  "duration"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.text     "location"
+    t.integer  "items_count",     default: 1, null: false
+  end
+
+  create_table "campaign_logistics", force: :cascade do |t|
+    t.integer  "segment_id"
+    t.string   "type",         limit: 50, default: "Campaign::Logistic::Shipment", null: false
+    t.text     "contact"
+    t.text     "explanations"
+    t.integer  "guests_count",            default: 0,                              null: false
+    t.integer  "duration"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.text     "location"
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+    t.index ["segment_id"], name: "index_campaign_logistics_on_segment_id", using: :btree
+  end
+
+  create_table "campaign_segments", id: :bigserial, force: :cascade do |t|
+    t.integer  "brief_id",                        default: 0,     null: false
+    t.integer  "country_id"
+    t.string   "label",                           default: "",    null: false
+    t.text     "description"
+    t.text     "expectations"
+    t.jsonb    "expectation_details"
+    t.string   "hashtags",                        default: [],                 array: true
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.text     "experience_details"
+    t.float    "segment_value"
+    t.string   "credits_scope"
+    t.float    "credits_value"
+    t.text     "credits"
+    t.integer  "users_count"
+    t.jsonb    "users_statuses",                  default: {},    null: false
+    t.boolean  "has_lock",                        default: false, null: false
+    t.string   "scopes",                                                       array: true
+    t.jsonb    "cash_value"
+    t.jsonb    "experience_value"
+    t.string   "currency",              limit: 3, default: "EUR", null: false
+    t.boolean  "show_logistic_warning",           default: true,  null: false
+    t.jsonb    "visual_assets",                   default: {}
+    t.index ["brief_id", "label"], name: "index_campaign_segments_on_brief_id_and_label", using: :btree
+    t.index ["country_id"], name: "index_campaign_segments_on_country_id", using: :btree
+  end
+
+  create_table "campaign_selected_user_logistics", force: :cascade do |t|
+    t.integer "selected_user_id"
+    t.integer "logistic_slot_id"
+    t.integer "product_id"
+    t.integer "user_address_id"
+    t.string  "guests",                                                                                          array: true
+    t.text    "details"
+    t.text    "shipment_details"
+    t.jsonb   "logistic_details",            default: {},                                           null: false
+    t.string  "type",             limit: 50, default: "Campaign::SelectedUser::Logistic::Shipment", null: false
+    t.integer "logistic_id"
+    t.index ["logistic_id"], name: "index_campaign_selected_user_logistics_on_logistic_id", using: :btree
+    t.index ["logistic_slot_id"], name: "index_campaign_selected_user_logistics_on_logistic_slot_id", using: :btree
+    t.index ["product_id"], name: "index_campaign_selected_user_logistics_on_product_id", using: :btree
+    t.index ["selected_user_id"], name: "index_campaign_selected_user_logistics_on_selected_user_id", using: :btree
+    t.index ["user_address_id"], name: "index_campaign_selected_user_logistics_on_user_address_id", using: :btree
+  end
+
+  create_table "campaign_selected_users", id: :bigserial, force: :cascade do |t|
+    t.integer "segment_id",                     default: 0,         null: false
+    t.integer "user_account_id",                default: 0,         null: false
+    t.string  "status",              limit: 20, default: "pending", null: false
+    t.jsonb   "status_steps",                   default: {},        null: false
+    t.text    "note"
+    t.boolean "logistic_complete",              default: false,     null: false
+    t.jsonb   "expectation_details"
+    t.float   "experience_value"
+    t.text    "experience_details"
+    t.float   "cash_value"
+    t.float   "segment_value"
+    t.string  "credits_scope"
+    t.float   "credits_value"
+    t.text    "credits"
+    t.text    "deal_details"
+    t.string  "refusal",             limit: 10
+    t.index ["segment_id", "user_account_id"], name: "unique_selected_user", unique: true, using: :btree
+    t.index ["status"], name: "campaign_selected_user_status", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -119,22 +204,15 @@ ActiveRecord::Schema.define(version: 20170814140911) do
 
   create_table "cities", id: :bigserial, force: :cascade do |t|
     t.bigint   "country_id"
-    t.string   "zip_code",   limit: 50, default: "", null: false
-    t.string   "name",       limit: 50, default: "", null: false
-    t.jsonb    "labels",                default: {}, null: false
+    t.string   "zip_code",   limit: 50, default: "",    null: false
+    t.string   "name",       limit: 50, default: "",    null: false
+    t.jsonb    "labels",                default: {},    null: false
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "main",                  default: false, null: false
     t.index ["country_id"], name: "index_cities_on_country_id", using: :btree
-  end
-
-  create_table "clothing_personality_traits", id: :bigserial, force: :cascade do |t|
-    t.bigint   "user_account_id",         null: false
-    t.integer  "clothing_personality_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.index ["user_account_id"], name: "index_clothing_personality_traits_on_account_id", using: :btree
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -196,6 +274,7 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.datetime "updated_at",                              null: false
     t.integer  "nationality_id"
     t.string   "postal_regex",   limit: 110
+    t.string   "calling_code",   limit: 6
     t.index ["iso"], name: "index_countries_on_iso", unique: true, using: :btree
   end
 
@@ -278,6 +357,23 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "gamification_successes", force: :cascade do |t|
+    t.string "name",      default: "", null: false
+    t.jsonb  "labels",    default: {}, null: false
+    t.string "category"
+    t.string "level",     default: "", null: false
+    t.text   "criterias", default: "", null: false
+    t.index ["category"], name: "index_gamification_successes_on_category", using: :btree
+    t.index ["name"], name: "index_gamification_successes_on_name", unique: true, using: :btree
+  end
+
+  create_table "gamification_unlocked_successes", force: :cascade do |t|
+    t.integer  "user_account_id", default: 0, null: false
+    t.integer  "success_id",      default: 0, null: false
+    t.datetime "unlocked_at",                 null: false
+    t.index ["user_account_id", "success_id"], name: "unique_unlocked_success", unique: true, using: :btree
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -315,7 +411,6 @@ ActiveRecord::Schema.define(version: 20170814140911) do
   end
 
   create_table "network_accesses", id: :bigserial, force: :cascade do |t|
-    t.bigint   "user_account_id",                                                             null: false
     t.bigint   "domain_id",                                                                   null: false
     t.string   "access_token"
     t.string   "access_token_secret"
@@ -330,9 +425,13 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.datetime "last_fetch_at"
     t.string   "access_type",             limit: 10,                         default: "user", null: false
     t.boolean  "active",                                                     default: true,   null: false
+    t.integer  "reach",                                                      default: 0,      null: false
+    t.float    "engagement",                                                 default: 0.0,    null: false
+    t.string   "owner_type",              limit: 20,                         default: "",     null: false
+    t.integer  "owner_id",                                                   default: 0,      null: false
     t.index ["access_token_expires_at"], name: "index_network_accesses_on_access_token_expires_at", using: :btree
     t.index ["domain_id"], name: "index_network_accesses_on_domain_id", using: :btree
-    t.index ["user_account_id"], name: "index_network_accesses_on_account_id", using: :btree
+    t.index ["owner_type", "owner_id"], name: "index_network_accesses_on_owner_type_and_owner_id", using: :btree
   end
 
   create_table "network_account_counters", id: :bigserial, force: :cascade do |t|
@@ -386,7 +485,7 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.string   "origin_id",           limit: 40,  default: "",                          null: false
     t.bigint   "gender_id"
     t.string   "type",                limit: 30,  default: "Network::Account::Profile", null: false
-    t.string   "profile_picture",     limit: 200
+    t.string   "profile_picture"
     t.string   "profile_link",        limit: 200
     t.string   "email",               limit: 100
     t.string   "username",            limit: 100
@@ -421,12 +520,13 @@ ActiveRecord::Schema.define(version: 20170814140911) do
   end
 
   create_table "network_apis", id: :bigserial, force: :cascade do |t|
-    t.bigint   "domain_id",                    null: false
-    t.string   "version",         default: "", null: false
+    t.bigint   "domain_id",                       null: false
+    t.string   "version",          default: "",   null: false
     t.integer  "rate_window"
     t.integer  "max_count"
-    t.integer  "calls_remaining", default: 0,  null: false
+    t.integer  "calls_remaining",  default: 0,    null: false
     t.datetime "next_fetch_at"
+    t.jsonb    "endpoint_details", default: "{}"
   end
 
   create_table "network_comments", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -538,37 +638,37 @@ ActiveRecord::Schema.define(version: 20170814140911) do
   end
 
   create_table "network_publications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "account_id",                 default: -> { "uuid_generate_v4()" }
-    t.bigint   "domain_id",                                                        null: false
-    t.string   "origin_id",       limit: 40, default: "",                          null: false
+    t.uuid     "account_id",                  default: -> { "uuid_generate_v4()" }
+    t.bigint   "domain_id",                                                         null: false
+    t.string   "origin_id",       limit: 40,  default: "",                          null: false
     t.uuid     "related"
     t.string   "related_as",      limit: 20
-    t.string   "kind",            limit: 15, default: "text",                      null: false
-    t.string   "tags",                                                                          array: true
+    t.string   "kind",            limit: 15,  default: "text",                      null: false
+    t.string   "tags",                                                                           array: true
     t.string   "locale",          limit: 5
     t.string   "privacy",         limit: 50
     t.string   "title"
     t.text     "content"
-    t.uuid     "tagged_accounts",                                                               array: true
+    t.uuid     "tagged_accounts",                                                                array: true
     t.string   "link"
     t.jsonb    "link_details"
-    t.string   "media_id",        limit: 40
+    t.string   "media_id",        limit: 100
     t.jsonb    "media_details"
-    t.float    "geocode",                                                                       array: true
-    t.integer  "engagement",                 default: 0,                           null: false
-    t.integer  "shares_count",               default: 0,                           null: false
-    t.integer  "likes_count",                default: 0,                           null: false
-    t.integer  "dislikes_count",             default: 0,                           null: false
-    t.integer  "views_count",                default: 0,                           null: false
-    t.integer  "comments_count",             default: 0,                           null: false
+    t.float    "geocode",                                                                        array: true
+    t.integer  "engagement",                  default: 0,                           null: false
+    t.integer  "shares_count",                default: 0,                           null: false
+    t.integer  "likes_count",                 default: 0,                           null: false
+    t.integer  "dislikes_count",              default: 0,                           null: false
+    t.integer  "views_count",                 default: 0,                           null: false
+    t.integer  "comments_count",              default: 0,                           null: false
     t.datetime "deleted_at"
     t.datetime "posted_at"
-    t.datetime "next_fetch_at",              default: '1970-01-01 00:00:00',       null: false
-    t.datetime "last_fetch_at",              default: '1970-01-01 00:00:00',       null: false
+    t.datetime "next_fetch_at",               default: '1970-01-01 00:00:00',       null: false
+    t.datetime "last_fetch_at",               default: '1970-01-01 00:00:00',       null: false
     t.jsonb    "extras"
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
-    t.date     "posted_on",                                                        null: false
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+    t.date     "posted_on",                                                         null: false
     t.index ["account_id"], name: "index_network_publications_on_account_id", using: :btree
     t.index ["domain_id", "origin_id"], name: "index_network_publications_on_domain_id_and_origin_id", unique: true, using: :btree
     t.index ["related"], name: "index_network_publications_on_related", using: :btree
@@ -687,12 +787,28 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.integer  "division_id"
     t.integer  "group_id"
     t.integer  "game_id"
+    t.integer  "league_id"
     t.index ["category_id"], name: "index_teams_on_category_id", using: :btree
     t.index ["club_id"], name: "index_teams_on_club_id", using: :btree
     t.index ["division_id"], name: "index_teams_on_division_id", using: :btree
     t.index ["game_id"], name: "index_teams_on_game_id", using: :btree
     t.index ["group_id"], name: "index_teams_on_group_id", using: :btree
+    t.index ["league_id"], name: "index_teams_on_league_id", using: :btree
     t.index ["level_id"], name: "index_teams_on_level_id", using: :btree
+  end
+
+  create_table "tracker_emails", force: :cascade do |t|
+    t.string   "recipient_type"
+    t.integer  "recipient_id"
+    t.string   "email"
+    t.string   "format",              limit: 60, default: "", null: false
+    t.datetime "seen_at"
+    t.datetime "clicked_at"
+    t.jsonb    "clicked_links",                  default: []
+    t.integer  "clicked_links_count",            default: 0,  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.index ["recipient_type", "recipient_id"], name: "index_tracker_emails_on_recipient_type_and_recipient_id", using: :btree
   end
 
   create_table "user_accounts", id: :bigserial, force: :cascade do |t|
@@ -740,6 +856,11 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.uuid     "social_card_uuid"
     t.string   "unconfirmed_email"
     t.string   "labels",                                                      default: [],                 array: true
+    t.float    "completion_rate",                                             default: 0.0,   null: false
+    t.jsonb    "metrics",                                                     default: {},    null: false
+    t.integer  "height_id"
+    t.integer  "shirt_size_id"
+    t.integer  "shoe_size_id"
     t.index ["children_count_id"], name: "index_user_accounts_on_children_count_id", using: :btree
     t.index ["city_id"], name: "index_user_accounts_on_city_id", using: :btree
     t.index ["clothing_personality_id"], name: "index_user_accounts_on_clothing_personality_id", using: :btree
@@ -761,15 +882,25 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.index ["user_account_id", "activity_id", "network_domain_id"], name: "unique_user_activity", unique: true, using: :btree
   end
 
+  create_table "user_addresses", force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "country_id"
+    t.string  "first_name",   limit: 25, default: "", null: false
+    t.string  "last_name",    limit: 25, default: "", null: false
+    t.string  "address",                 default: "", null: false
+    t.string  "address_more"
+    t.string  "zip_code",     limit: 20, default: "", null: false
+    t.string  "city",         limit: 60, default: "", null: false
+    t.index ["account_id"], name: "index_user_addresses_on_account_id", using: :btree
+    t.index ["country_id"], name: "index_user_addresses_on_country_id", using: :btree
+  end
+
   create_table "user_avatars", id: :bigserial, force: :cascade do |t|
-    t.bigint   "user_account_id",                     null: false
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.integer  "position",                            null: false
-    t.string   "original_url"
-    t.boolean  "main",                default: false, null: false
+    t.bigint  "user_account_id",                 null: false
+    t.integer "position",                        null: false
+    t.string  "original_url"
+    t.boolean "main",            default: false, null: false
+    t.jsonb   "avatar_asset"
     t.index ["user_account_id", "position"], name: "index_avatars_on_account_id_and_position", unique: true, using: :btree
     t.index ["user_account_id"], name: "index_avatars_on_account_id", using: :btree
   end
@@ -783,13 +914,6 @@ ActiveRecord::Schema.define(version: 20170814140911) do
     t.string   "title_publication", limit: 100
     t.index ["user_account_id", "url"], name: "index_user_blogs_on_account_id_and_url", unique: true, using: :btree
     t.index ["user_account_id"], name: "index_user_blogs_on_account_id", using: :btree
-  end
-
-  create_table "user_clothing_personalities", id: :bigserial, force: :cascade do |t|
-    t.bigint   "user_account_id",         null: false
-    t.integer  "clothing_personality_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
   end
 
   create_table "user_jobs", force: :cascade do |t|
@@ -846,5 +970,6 @@ ActiveRecord::Schema.define(version: 20170814140911) do
   add_foreign_key "teams", "divisions"
   add_foreign_key "teams", "games"
   add_foreign_key "teams", "groups"
+  add_foreign_key "teams", "leagues"
   add_foreign_key "teams", "levels"
 end

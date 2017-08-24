@@ -1,17 +1,7 @@
-- unless player_signed_in?
+.card.text-center
+	.card-block
+		%h2.card-title= 'Your carreer, now.'
+		%p.card-text= 'With supporting text below as a natural lead-in to additional content.'
 
-	.card.text-center
-		.card-block
-			%h2.card-title= 'Your carreer, now.'
-			%p.card-text= 'With supporting text below as a natural lead-in to additional content.'
-
-			= link_to "Rentrer dans le game.", new_player_registration_path, class: 'btn btn-primary'
-
-- else
-	.row
-		- @models.each do |model|
-			.col-md-2
-				= link_to send("#{model.to_s}_path") do
-					.card.card-inverse
-						.card-block
-							= model.capitalize
+		= link_to "Rentrer dans le game.", new_player_registration_path, class: 'btn btn-primary'
+		= link_to "Me connecter.", new_player_session_path, class: 'btn btn-secondary'

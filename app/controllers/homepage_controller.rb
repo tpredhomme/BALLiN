@@ -1,6 +1,6 @@
 # Basic controller for Homepage
 class HomepageController < ApplicationController
   def show
-    @models = [:clubs, :teams, :players, :categories, :divisions, :groups, :levels, :calendars, :leagues, :days, :games]
+    redirect_to player if player_signed_in?
   end
 end

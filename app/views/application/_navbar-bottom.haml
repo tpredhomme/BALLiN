@@ -9,3 +9,12 @@
 
 			= link_to fa_icon('users'), player.club, class: 'navbar-brand my-auto'
 			= link_to fa_icon('list-ol'), "#", class: 'navbar-brand my-auto'
+
+- else
+
+	%nav.navbar.navbar-s1.fixed-bottom
+		.d-flex.justify-content-center.py-2
+			%strong.text-white.navbar-brand.my-auto= "JOIN US"
+			= link_to fa_icon('facebook'), player, class: 'navbar-brand my-auto'
+			= link_to fa_icon('instagram'), player, class: 'navbar-brand my-auto'
+			= link_to fa_icon('snapchat'), player, class: 'navbar-brand my-auto'

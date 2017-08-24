@@ -6,7 +6,7 @@ class Team < ApplicationRecord
   belongs_to :division
   belongs_to :group
 
-  belongs_to :game
+  belongs_to :league
 
   has_many :players
 end
