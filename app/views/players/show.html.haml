@@ -6,3 +6,9 @@
 		.card-text.mt-3
 			%p= link_to @player.club.name, @player.club
 			%p= link_to @player.team.name, @player.team
+
+.card.text-center
+	.card-block
+		%span.player-position= @player.position.name
+		.card-text.mt-4
+			= "#{@player.age} ans. #{@player.height} cm."

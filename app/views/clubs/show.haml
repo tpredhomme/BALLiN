@@ -1,22 +1,17 @@
-%p#notice
-	= notice
+.card.text-center
+	.card-block
+		%h1.card-title= @club.name
 
-.row
-	.col-12
-		.card.text-center
-			.card-block
-				%h1.card-title= @club.name
+	- if @teams.any?
+		.card-block
+			%h4.card-title= "Equipes du club (#{@teams.count})"
+			- @teams.each do |team|
+				= link_to team.name, team
 
-			- if @teams.any?
-				.card-block
-					%h4.card-title= "Equipes du club (#{@teams.count})"
-					- @teams.each do |team|
-						= link_to team.name, team
-
-			- if @players.any?
-				.card-block
-					%h4.card-title= "Joueurs du club (#{@players.count})"
-					- @players.each do |player|
-						%p
-							= link_to player.full_name, player
-							= link_to "(#{player.team.name})", player.team
+	- if @players.any?
+		.card-block
+			%h4.card-title= "Joueurs du club (#{@players.count})"
+			- @players.each do |player|
+				%p
+					= link_to player.full_name, player
+					= link_to "(#{player.team.name})", player.team

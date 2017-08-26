@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824061024) do
+ActiveRecord::Schema.define(version: 20170826030955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,17 +38,19 @@ ActiveRecord::Schema.define(version: 20170824061024) do
     t.datetime "confirmation_sent_at"
     t.string   "locale",                 default: "en",  null: false
     t.string   "default_currency",       default: "USD", null: false
+    t.datetime "first_campaign_at"
     t.index ["confirmation_token"], name: "index_administrators_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_administrators_on_email", using: :btree
     t.index ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "brand_accounts", id: :bigserial, force: :cascade do |t|
-    t.string   "name",             limit: 50, default: "",    null: false
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "default_currency", limit: 3,  default: "EUR", null: false
-    t.string   "locale",           limit: 5,  default: "en",  null: false
+    t.string   "name",              limit: 50, default: "",    null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.string   "default_currency",  limit: 3,  default: "EUR", null: false
+    t.string   "locale",            limit: 5,  default: "en",  null: false
+    t.datetime "first_campaign_at"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -755,10 +757,22 @@ ActiveRecord::Schema.define(version: 20170824061024) do
     t.string   "user_name"
     t.integer  "club_id"
     t.integer  "team_id"
+    t.integer  "position_id"
+    t.integer  "age"
+    t.integer  "height"
+    t.integer  "weight"
+    t.integer  "number"
     t.index ["club_id"], name: "index_players_on_club_id", using: :btree
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
+    t.index ["position_id"], name: "index_players_on_position_id", using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
     t.index ["team_id"], name: "index_players_on_team_id", using: :btree
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taxonomies", id: :bigserial, force: :cascade do |t|
@@ -965,6 +979,7 @@ ActiveRecord::Schema.define(version: 20170824061024) do
     t.index ["privacy"], name: "index_user_selections_on_privacy", using: :btree
   end
 
+  add_foreign_key "players", "positions"
   add_foreign_key "players", "teams"
   add_foreign_key "teams", "categories"
   add_foreign_key "teams", "divisions"

@@ -1,6 +1,16 @@
+html {
+    height: 100%;
+    background: url('background/homepage.jpg') no-repeat;
+    background-size: cover;
+    background-position: 15% 50%;
+}
+
 body {
-    // background: url('background/homepage.jpg');
-    // background-position: 50% 20%;
+    background-color: transparent;
+}
+
+.container {
+    margin-top: 8rem;
 }
 
 .row {
@@ -20,7 +30,6 @@ body {
 
 .navbar-s2 {
     background:     $primary;
-    opacity:        0.9;
     padding-left:   10%;
     padding-right:  10%;
     a { color:      $secondary; }

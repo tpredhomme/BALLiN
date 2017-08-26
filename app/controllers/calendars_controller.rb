@@ -1,7 +1,8 @@
 #
 class CalendarsController < ApplicationController
   def index
-    @calendars = Calendar.all
+    # @calendars = Calendar.all
+    @calendar = "calendars/calendar_#{player.club.id}.jpg"
   end
 
   def show

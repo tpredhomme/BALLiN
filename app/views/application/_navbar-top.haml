@@ -1,4 +1,4 @@
-%nav.navbar.navbar-s1.bg-white
+%nav.navbar.navbar-s1.bg-white.fixed-top
 	.d-flex.justify-content-between
 		.col-2.spce= ''
 		
@@ -8,7 +8,7 @@
 		
 		.col-2.my-auto
 			.nav-item
-				- klass = 'nav-link btn btn-outline-primary'
+				- klass = 'nav-link btn btn-outline-primary py-1 px-0'
 				- if try(:player)
 					= link_to fa_icon('times'), destroy_player_session_path, method: :delete, class: klass
 				- else

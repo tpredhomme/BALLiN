@@ -1,0 +1,63 @@
+.card
+  .card-block
+    %h1.card-title= 'Sign up'
+ 
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = devise_error_messages!
+      .row
+        .col-6
+          .field.mt-2
+            = f.label :email 
+            %br/
+            = f.email_field :email, autofocus: true
+
+          .field.mt-2
+            = f.label :first_name
+            %br/
+            = f.text_field :first_name
+
+          .field.mt-2
+            = f.label :last_name
+            %br/
+            = f.text_field :last_name
+
+          .field.mt-2
+            = f.label :password
+            %br/
+            = f.password_field :password, autocomplete: "off"
+
+          .field.mt-2
+            = f.label :password_confirmation
+            %br/
+            = f.password_field :password_confirmation, autocomplete: "off"
+        
+        .col-6
+          .field.mt-2
+            = f.label :club
+            %br/
+            = f.collection_select(:club_id, Club.all, :id, :name)
+
+          .field.mt-2
+            = f.label :position
+            %br/
+            = f.collection_select(:position_id, Position.all, :id, :name)
+
+          .field.mt-2
+            = f.label :age
+            %br/
+            = f.text_field :age
+
+          .field.mt-2
+            = f.label :height
+            %br/
+            = f.text_field :height
+
+          .field.mt-2
+            = f.label :number
+            %br/
+            = f.text_field :number
+
+      .actions
+        = f.submit "Sign up"
+
+    = render "devise/shared/links"
