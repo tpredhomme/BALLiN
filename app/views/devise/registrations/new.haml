@@ -12,22 +12,22 @@
             = f.email_field :email, autofocus: true
 
           .field.mt-2
-            = f.label :first_name
+            = f.label 'Nom de Famille'
             %br/
             = f.text_field :first_name
 
           .field.mt-2
-            = f.label :last_name
+            = f.label 'Prénom'
             %br/
             = f.text_field :last_name
 
           .field.mt-2
-            = f.label :password
+            = f.label 'Mot de passe'
             %br/
             = f.password_field :password, autocomplete: "off"
 
           .field.mt-2
-            = f.label :password_confirmation
+            = f.label 'Mdp confirmation'
             %br/
             = f.password_field :password_confirmation, autocomplete: "off"
         
@@ -48,12 +48,12 @@
             = f.text_field :age
 
           .field.mt-2
-            = f.label :height
+            = f.label 'Taille (en cm)'
             %br/
             = f.text_field :height
 
           .field.mt-2
-            = f.label :number
+            = f.label 'Numero de Maillot'
             %br/
             = f.text_field :number
 
