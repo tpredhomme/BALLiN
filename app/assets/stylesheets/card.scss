@@ -1,15 +1,15 @@
-.card-inverse {
-    a { color: $btn-primary-color; }
-    color: $btn-primary-color;
-    background: $brand-primary;
-}
-
 .card {
-    padding-top:    2rem;
     padding-bottom: 2rem;
     margin-bottom:  1.5rem;
-    background:     rgba(0, 0, 0, 0.6);
-    color:          white;
+    background:     $white;
+    color:          $black;
     border-radius:  0;
+    border:         0;
     text-align:     center;
+
+    a { color: gray; }
+}
+
+.card-transparent {
+    background: transparent;
 }

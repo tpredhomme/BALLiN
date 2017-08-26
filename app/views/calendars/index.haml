@@ -1,5 +1,4 @@
 .card
+  %h6.jumbotron= 'Matches à venir'
   .card-block
-    %h1.card-title= 'Match à Venir.'
-    
-    .mt-4= image_tag @calendar, style: 'max-width: 100%; filter: saturate(1) sepia(1); -webkit-filter: sepia(1) saturate(1);'
+    = image_tag @calendar, style: 'max-width: 20rem;'

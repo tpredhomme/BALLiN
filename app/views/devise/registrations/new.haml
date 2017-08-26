@@ -1,63 +1,80 @@
 .card
   .card-block
-    %h1.card-title= 'Sign up'
+    %h4.card-title= 'Sign up'
  
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = devise_error_messages!
+      
       .row
-        .col-6
+        .col-12
           .field.mt-2
             = f.label :email 
             %br/
             = f.email_field :email, autofocus: true
 
-          .field.mt-2
-            = f.label 'Nom de Famille'
-            %br/
-            = f.text_field :first_name
-
-          .field.mt-2
-            = f.label 'Prénom'
-            %br/
-            = f.text_field :last_name
-
+        .col-12
           .field.mt-2
             = f.label 'Mot de passe'
             %br/
             = f.password_field :password, autocomplete: "off"
 
+        .col-12
           .field.mt-2
             = f.label 'Mdp confirmation'
             %br/
             = f.password_field :password_confirmation, autocomplete: "off"
+
+          %br/ 
+          %br/
+
+        .col-12
+          .field.mt-2
+            = f.label 'Nom de Famille'
+            %br/
+            = f.text_field :first_name
+          
+        .col-12
+          .field.mt-2
+            = f.label 'Prénom'
+            %br/
+            = f.text_field :last_name
+
+        .col-12
+          .field.mt-2
+            = f.label :age
+            %br/
+            = f.text_field :age
         
-        .col-6
+        .col-12
+          .field.mt-2
+            = f.label 'Taille (en cm)'
+            %br/
+            = f.text_field :height
+        
+        .col-12
+          .field.mt-2
+            = f.label 'Numero de Maillot'
+            %br/
+            = f.text_field :number
+        
+          %br/ 
+          %br/
+
+        .col-12
           .field.mt-2
             = f.label :club
             %br/
             = f.collection_select(:club_id, Club.all, :id, :name)
 
+        .col-12
           .field.mt-2
             = f.label :position
             %br/
             = f.collection_select(:position_id, Position.all, :id, :name)
 
-          .field.mt-2
-            = f.label :age
-            %br/
-            = f.text_field :age
-
-          .field.mt-2
-            = f.label 'Taille (en cm)'
-            %br/
-            = f.text_field :height
-
-          .field.mt-2
-            = f.label 'Numero de Maillot'
-            %br/
-            = f.text_field :number
+          
 
       .actions
-        = f.submit "Sign up"
+        = f.submit "Sign up", class: "btn btn-primary mb-4"
 
     = render "devise/shared/links"

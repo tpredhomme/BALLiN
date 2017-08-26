@@ -1,14 +1,13 @@
 .card.text-center
-	.card-block
-		%h1.card-title= @player.full_name
-		%h6.card-subtitle= @player.user_name
-
-		.card-text.mt-3
-			%p= link_to @player.club.name, @player.club
-			%p= link_to @player.team.name, @player.team
-
-.card.text-center
+	%h6.jumbotron= 'Votre Profil'
 	.card-block
 		%span.player-position= @player.position.name
-		.card-text.mt-4
-			= "#{@player.age} ans. #{@player.height} cm."
+		%br/
+		%h1.card-title.mt-4= @player.full_name
+		%h6.card-subtitle= @player.user_name
+		.card-text= "#{@player.age} ans. #{@player.height} cm."
+		.card-text.mt-3
+			= link_to @player.club.name, @player.club
+			%br/
+			= link_to @player.team.name, @player.team
+			
