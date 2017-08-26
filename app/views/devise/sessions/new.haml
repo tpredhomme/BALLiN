@@ -1,7 +1,6 @@
 .card
+    %h6.jumbotron= "Log in"
     .card-block
-        %h4.card-title= "Log in"
-        
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           
             .field.mt-4
