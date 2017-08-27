@@ -1,6 +1,11 @@
-.card.card-transparent.text-center.mt-5
+.card.text-center.mt-5
+	%h6.jumbotron= "BALLiN"
 	.card-block
-		%h1.card-title.text-white.text-jumbotron= "Your carreer starts, now."
+		%h4.card-title= "Your carreer starts now."
 
-		= link_to "M'inscrire.", new_player_registration_path, class: 'btn btn-primary my-3'
-		= link_to "Me connecter.", new_player_session_path, class: 'btn btn-secondary'
+		.card-text
+			= "Toutes nos félicitations et tous nos remerciement aux organisateurs, clubs et aux joueurs de cette deuxieme edition de la "
+			%strong= "Vinci Cup"
+			= ". Nous avons pu filmer plus de 50 matchs au cours de la competition. Nous allons mettre en ligne les videos dans la semaine. Suivez nous sur les reseaux sociaux @teamballinfc pour ne rien louper de VOTRE activité."
+		- link_to "M'inscrire.", new_player_registration_path, class: 'btn btn-primary my-3'
+		- link_to "Me connecter.", new_player_session_path, class: 'btn btn-secondary'

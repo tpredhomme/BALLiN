@@ -9,4 +9,4 @@
 			- if try(:player)
 				= link_to fa_icon('times'), destroy_player_session_path, method: :delete, class: klass
 			- else
-				= link_to fa_icon('sign-in'), new_player_session_path, class: klass
+				- link_to fa_icon('sign-in'), new_player_session_path, class: klass
