@@ -1,12 +1,5 @@
 %nav.navbar.navbar-s1.bg-white.fixed-top
-	.d-flex.justify-content-between
+	.d-flex.justify-content-center
 		
 		= link_to root_path, class: 'navbar-brand' do
 			= image_tag 'logo/logo.svg', size: '175x100'
-		
-		.nav-item.my-auto
-			- klass = 'nav-link btn btn-outline-primary mr-4'
-			- if try(:player)
-				= link_to fa_icon('times'), destroy_player_session_path, method: :delete, class: klass
-			- else
-				- link_to fa_icon('sign-in'), new_player_session_path, class: klass
