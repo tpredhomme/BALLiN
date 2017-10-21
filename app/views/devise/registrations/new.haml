@@ -67,6 +67,11 @@
             = f.label :position
             = f.collection_select(:position_id, Position.all, :id, :name, {}, { class: 'form-control' })
 
+        .col-12
+          .form-group
+            = f.label "Numero de maillot"
+            = f.text_field :number, class: 'form-control'
+
   .card.card-sp
     .card-block
       
