@@ -1,3 +1,5 @@
+division = Division.create(name: "Paname Cup")
+
 levels = [
 "DISTRICT ALLIER",
 "DISTRICT CANTAL",
@@ -111,6 +113,6 @@ clubs = [
 
 clubs.each do |club|
 	c = Club.create(name: club)
-	c.teams << Team.create(name: 'Equipe 1', category_id: 1, level_id: 1, division_id: 1, group_id: 1, league_id: 1, club_id: c.id)
+	c.teams << Team.create(name: 'Equipe 1', category_id: 1, level_id: 1, division_id: division.id, group_id: 1, league_id: 1, club_id: c.id)
 	c.save
 end
