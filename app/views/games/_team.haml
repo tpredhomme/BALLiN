@@ -1,5 +1,13 @@
-%h4= team.name
-%h6= team.club.name
+%strong= link_to team.club.name, team.club
+%h8= link_to team.name, team
 
-- team.players.each do |player|
-	%p= player.first_name
+.mt-4
+.row
+	.col-12
+		- @game.players.each do |player|
+			%p= link_to player.player_name, player if team == player.team
+		
+.row
+	.col-12
+		- if player.team == team && !@game.players.include?(player)
+			= link_to "I'll play !", enter_games_create_path(game_id: @game.id, player_id: player.id), class: 'btn btn-primary btn-block' 

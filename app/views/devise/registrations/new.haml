@@ -1,80 +1,118 @@
-.card
-  %h6.jumbotron= 'Sign up'
+.card.card-sp
   .card-block
- 
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = devise_error_messages!
-      
-      .row
+    
+    .card-title= "S'inscrire"
+    .card-subtitle= "C'est ici que ta carriere commence"
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+
+  .card.card-sp
+    .card-block
+
+      .row.mb-0
         .col-12
-          .field.mt-2
+          .form-group
             = f.label :email 
-            %br/
-            = f.email_field :email, autofocus: true
+            = f.email_field :email, autofocus: true, placeholder: "Enter email", class: 'form-control'
+            %small.form-text.text-muted= "We'll never share your email with anyone else."
 
         .col-12
-          .field.mt-2
+          .form-group
             = f.label 'Mot de passe'
-            %br/
-            = f.password_field :password, autocomplete: "off"
+            = f.password_field :password, autocomplete: "off", placeholder: "Mot de passe", class: 'form-control'
+            %small.form-text.text-muted= "6 caractères minimum"
 
         .col-12
-          .field.mt-2
+          .form-group
             = f.label 'Mdp confirmation'
-            %br/
-            = f.password_field :password_confirmation, autocomplete: "off"
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirmez mot de passe", class: 'form-control'
 
-          %br/ 
-          %br/
-
+  .card.card-sp
+    .card-block
+      
+      .row.mb-0
         .col-12
-          .field.mt-2
+          .form-group
             = f.label 'Nom de Famille'
-            %br/
-            = f.text_field :first_name
+            = f.text_field :first_name, class: 'form-control'
           
         .col-12
-          .field.mt-2
+          .form-group
             = f.label 'Prénom'
-            %br/
-            = f.text_field :last_name
+            = f.text_field :last_name, class: 'form-control'
 
         .col-12
-          .field.mt-2
+          .form-group
             = f.label :age
-            %br/
-            = f.text_field :age
+            = f.text_field :age, class: 'form-control'
         
         .col-12
-          .field.mt-2
-            = f.label 'Taille (en cm)'
-            %br/
-            = f.text_field :height
-        
-        .col-12
-          .field.mt-2
-            = f.label 'Numero de Maillot'
-            %br/
-            = f.text_field :number
-        
-          %br/ 
-          %br/
+          .form-group
+            = f.label 'Taille'
+            = f.text_field :height, class: 'form-control'
+            %small.form-text.text-muted= "(en cm)"
+      
+  .card.card-sp
+    .card-block
 
+      .row.mb-0
         .col-12
-          .field.mt-2
+          .form-group
             = f.label :club
-            %br/
-            = f.collection_select(:club_id, Club.all, :id, :name)
+            = f.collection_select(:club_id, Club.all, :id, :name, {}, { class: 'form-control' })
 
         .col-12
-          .field.mt-2
+          .form-group
             = f.label :position
-            %br/
-            = f.collection_select(:position_id, Position.all, :id, :name)
+            = f.collection_select(:position_id, Position.all, :id, :name, {}, { class: 'form-control' })
 
+  .card.card-sp
+    .card-block
+      
+      .row.mb-0
+        
+        .col-12
+          .form-group
+            = f.label :best_foot
+            = f.text_field :best_foot, class: 'form-control'
+        
+        .col-12
+          .form-group
+            = f.label :best_side
+            = f.text_field :best_side, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :right_foot_juggles
+            = f.text_field :right_foot_juggles, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :left_foot_juggles
+            = f.text_field :left_foot_juggles, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :head_juggles
+            = f.text_field :head_juggles, class: 'form-control'
           
+        .col-12
+          .form-group
+            = f.label :stamina
+            = f.text_field :stamina, class: 'form-control'
 
-      .actions
-        = f.submit "Sign up", class: "btn btn-primary mb-4"
+        .col-12
+          .form-group
+            = f.label :speed
+            = f.text_field :speed, class: 'form-control'
 
-    = render "devise/shared/links"
+        .col-12
+          .form-group
+            = f.label :jump
+            = f.text_field :jump, class: 'form-control'
+
+  .actions
+    = f.submit "Sign up", class: "btn btn-primary btn-block mb-4"
+
+  = render "devise/shared/links"

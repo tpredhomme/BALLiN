@@ -16,6 +16,10 @@ Rails.application.routes.draw do
 
   resources :rankings
 
+  get 'enter_games/create'
+
+  resources :admin
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homepage#show'
 end

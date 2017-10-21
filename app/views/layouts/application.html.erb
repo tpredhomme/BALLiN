@@ -3,9 +3,12 @@
   <head>
     <title>Ballin</title>
     <%= csrf_meta_tags %>
+
+    <% favicon_link_tag 'logo/logo' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   </head>
 
   <body>
@@ -18,8 +21,8 @@
 
           <%= yield %>
         </div>
-      <%= render 'navbar-bottom' %>
-
     </div>
+
+    <%= render 'navbar-bottom' %>
   </body>
 </html>

@@ -1,0 +1,56 @@
+.card.card-sp
+  .card-block
+    
+    .card-title= "Complete ton profil"
+    .card-subtitle= "Pour te rendre plus visible aux yeux des recruteurs"
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = devise_error_messages!
+
+  .card.card-sp
+    .card-block
+      
+      .row.mb-0
+        
+        .col-12
+          .form-group
+            = f.label :best_foot
+            = f.text_field :best_foot, class: 'form-control'
+        
+        .col-12
+          .form-group
+            = f.label :best_side
+            = f.text_field :best_side, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :right_foot_juggles
+            = f.text_field :right_foot_juggles, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :left_foot_juggles
+            = f.text_field :left_foot_juggles, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :head_juggles
+            = f.text_field :head_juggles, class: 'form-control'
+          
+        .col-12
+          .form-group
+            = f.label :stamina
+            = f.text_field :stamina, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :speed
+            = f.text_field :speed, class: 'form-control'
+
+        .col-12
+          .form-group
+            = f.label :jump
+            = f.text_field :jump, class: 'form-control'
+
+    .actions
+      = f.submit "Update", class: "btn btn-primary btn-block mb-4"

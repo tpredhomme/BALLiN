@@ -23,9 +23,9 @@ class Players::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+  end
 
   # DELETE /resource
   # def destroy
@@ -43,9 +43,14 @@ class Players::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:club_id, :team_id, :age, :position_id, :height, :weight])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:club_id, :team_id, :age, :position_id, :height, :weight, :best_foot, :best_side, :right_foot_juggles, :left_foot_juggles, :head_juggles, :stamina, :speed, :jump])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:club_id, :team_id, :age, :position_id, :height, :weight, :best_foot, :best_side, :right_foot_juggles, :left_foot_juggles, :head_juggles, :stamina, :speed, :jump])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

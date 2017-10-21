@@ -1,15 +1,18 @@
 // Color
+$black: #000;
+$white: #fff;
+
+$body-bg: $white;
+
 $brand-primary:     #fee101;
 $brand-secondary:   #000;
-$white:             #fff;
-$body-bg:           $white;
 
-$primary: $brand-primary;
+$primary:   $brand-primary;
 $secondary: $brand-secondary;
 
 // Buttons
-$btn-primary-color: #000;
-$btn-secondary-color: #000;
+$btn-primary-color:     $black;
+$btn-secondary-color:   $black;
 
 // Radius
 $border-radius-base:        0px;

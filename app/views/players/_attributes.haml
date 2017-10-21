@@ -1,0 +1,29 @@
+.row.font-small.mb-2
+	- [:best_foot, :best_side, :right_foot_juggles, :left_foot_juggles, :head_juggles, :stamina, :speed, :jump].each do |attribut|
+		- if @player.send(attribut).present?
+			.col-6
+				- if player == @player
+					= link_to edit_player_registration_path do
+						.panel-gray
+							.float-right= fa_icon 'check'
+							.panel-gray--label= t("profil.attr.#{attribut}")
+							.font-thin= @player.send(attribut).to_s.upcase
+				- else
+					.panel-gray
+						.float-right= fa_icon 'check'
+						.panel-gray--label= t("profil.attr.#{attribut}")
+						.font-thin= @player.send(attribut).to_s.upcase
+		
+		- else
+			.col-6
+				- if player == @player
+					= link_to edit_player_registration_path do
+						.panel-white
+							.float-right= fa_icon 'edit'
+							.panel-white--label= t("profil.attr.#{attribut}")
+							%small.font-thin= 'edit'
+				- else
+					.panel-white
+						.float-right= fa_icon 'circle'
+						.panel-white--label= t("profil.attr.#{attribut}")
+						%small.font-thin= 'Non renseigné'

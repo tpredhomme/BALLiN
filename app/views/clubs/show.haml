@@ -1,12 +1,22 @@
-.card.text-center
-	%h6.jumbotron= "Mon Club"
-	.card-block
-		%h1.card-title= @club.name
+.card.card-sp.pb-0
+	.card-block.pb-0
+		.row
+			.col.text-center
+				.card-title= @club.name
+				.card-subtitle= @club.adress
+				.card-text= @club.fields
 
-	- if @players.any?
-		.card-block
-			%h4.card-title= "Joueurs (#{@players.count})"
-			- @players.each do |player|
-				%p
-					= link_to player.full_name, player
-					= link_to "(#{player.team.name})", player.team
+		.row.mb-0
+			.col
+				%ul.nav.justify-content-center
+					%li.nav-item
+						= link_to 'Equipes', '', class: 'nav-link active'
+
+.card
+	.card-block
+		.row 
+			.col
+				- @club.teams.each do |team|
+					= link_to team do
+						.panel-gray
+							= "#{team.category.name} - #{team.level.name} - #{team.name}".upcase

@@ -1,0 +1,18 @@
+- team_dom = game.teams.first
+- team_ext = game.teams.second
+
+.mb-3
+	%small.pl-1
+		= fa_icon 'clock-o'
+		= game.datetime.try(:asctime) || "unclear"
+
+	= link_to game do
+		.row.panel-gray
+			.col
+				%div= team_dom.club.name
+				.small= team_dom.name
+
+			.col.text-right
+				%div= team_ext.club.name
+				.small= team_ext.name
+

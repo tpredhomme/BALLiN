@@ -1,0 +1,24 @@
+= form_for(@game) do |f|
+	- if @game.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(calendar.errors.count, "error")} prohibited this calendar from being saved:"
+
+		%ul
+			- calendar.errors.full_messages.each do |message|
+				%li= message
+
+
+	.field
+		= f.label :day
+		= f.text_field :day
+
+	.field
+		= f.label :date
+		= f.date_field(:date)
+
+	.field
+		= f.label :datetime
+		= f.datetime_field(:datetime)
+
+	.actions
+		= f.submit class: 'btn btn-primary'

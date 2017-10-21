@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826030955) do
+ActiveRecord::Schema.define(version: 20171021021450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,24 +137,20 @@ ActiveRecord::Schema.define(version: 20170826030955) do
     t.string   "label",                           default: "",    null: false
     t.text     "description"
     t.text     "expectations"
-    t.jsonb    "expectation_details"
     t.string   "hashtags",                        default: [],                 array: true
     t.datetime "start_at"
     t.datetime "end_at"
     t.text     "experience_details"
     t.float    "segment_value"
-    t.string   "credits_scope"
-    t.float    "credits_value"
-    t.text     "credits"
     t.integer  "users_count"
     t.jsonb    "users_statuses",                  default: {},    null: false
-    t.boolean  "has_lock",                        default: false, null: false
-    t.string   "scopes",                                                       array: true
     t.jsonb    "cash_value"
     t.jsonb    "experience_value"
     t.string   "currency",              limit: 3, default: "EUR", null: false
     t.boolean  "show_logistic_warning",           default: true,  null: false
     t.jsonb    "visual_assets",                   default: {}
+    t.jsonb    "ats"
+    t.jsonb    "contents"
     t.index ["brief_id", "label"], name: "index_campaign_segments_on_brief_id_and_label", using: :btree
     t.index ["country_id"], name: "index_campaign_segments_on_country_id", using: :btree
   end
@@ -221,6 +217,9 @@ ActiveRecord::Schema.define(version: 20170826030955) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "adress"
+    t.string   "fields"
+    t.string   "contact"
   end
 
   create_table "contact_message_replies", id: :bigserial, force: :cascade do |t|
@@ -357,6 +356,23 @@ ActiveRecord::Schema.define(version: 20170826030955) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "day"
+    t.datetime "datetime"
+    t.date     "date"
+    t.string   "score"
+    t.integer  "player_id"
+    t.index ["player_id"], name: "index_games_on_player_id", using: :btree
+  end
+
+  create_table "games_players", id: false, force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "player_id"
+    t.integer "number"
+  end
+
+  create_table "games_teams", id: false, force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "team_id"
   end
 
   create_table "gamification_successes", force: :cascade do |t|
@@ -740,18 +756,18 @@ ActiveRecord::Schema.define(version: 20170826030955) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "user_name"
@@ -762,8 +778,19 @@ ActiveRecord::Schema.define(version: 20170826030955) do
     t.integer  "height"
     t.integer  "weight"
     t.integer  "number"
+    t.string   "best_foot"
+    t.string   "best_side"
+    t.integer  "right_foot_juggles"
+    t.integer  "left_foot_juggles"
+    t.integer  "head_juggles"
+    t.string   "stamina"
+    t.string   "speed"
+    t.string   "jump"
+    t.integer  "game_id"
+    t.boolean  "admin",                  default: false
     t.index ["club_id"], name: "index_players_on_club_id", using: :btree
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
+    t.index ["game_id"], name: "index_players_on_game_id", using: :btree
     t.index ["position_id"], name: "index_players_on_position_id", using: :btree
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
     t.index ["team_id"], name: "index_players_on_team_id", using: :btree
@@ -979,6 +1006,8 @@ ActiveRecord::Schema.define(version: 20170826030955) do
     t.index ["privacy"], name: "index_user_selections_on_privacy", using: :btree
   end
 
+  add_foreign_key "games", "players"
+  add_foreign_key "players", "games"
   add_foreign_key "players", "positions"
   add_foreign_key "players", "teams"
   add_foreign_key "teams", "categories"

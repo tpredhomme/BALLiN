@@ -1,50 +1,46 @@
-html {
-    height: 100%;
-    background: asset-url('background/homepage.jpg') no-repeat;
-    background-size: cover;
-    background-position: 15% 50%;
-    background-attachment: fixed;
-}
-
 body {
     background-color: transparent;
+    font-size: 0.7rem;
 }
 
-.jumbotron {
-    border-radius: 0;
-    background-color: #fee101;
-    padding: 1rem 2rem;
+.wrapper {
+    margin-bottom: 2rem;
 }
 
-.text-jumbotron {
-    background-color: rgba(0, 0, 0, 0.36);
-    padding: 1.5rem;
-    text-align: justify;
-    font-size: 2.1rem;
+a {
+    color: $secondary;
+    &:hover { text-decoration: none !important; }
 }
 
 .container {
-    margin-top: 8rem;
+    padding: 0;
 }
 
 .row {
     margin-bottom: 3rem;
 }
 
-.wrapper {
-    padding-top:    2rem;
-    padding-bottom: 6rem;
+.panel-gray {
+    padding: 1rem;
+    background: #3a3a3a;
+    color: white;
+    margin: 4px;
+    border-radius: 2px;
+
+    &--label {
+        font-size: 10px;
+    }
 }
 
-.navbar-s1 {
-    background: black;
-    text-align: center;
-    padding:    0;
-}
+.panel-white {
+    padding: 1rem;
+    background: white;
+    color: #3a3a3a;
+    border: 1px solid #3a3a3a;
+    margin: 4px;
+    border-radius: 2px;
 
-.navbar-s2 {
-    background:     $primary;
-    padding-left:   10%;
-    padding-right:  10%;
-    a { color:      $secondary; }
+    &--label {
+        font-size: 10px;
+    }
 }

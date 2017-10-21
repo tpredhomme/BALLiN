@@ -21,3 +21,14 @@
 
 en:
   hello: "Hello world"
+
+  profil:
+    attr:
+      best_foot: "Meilleur pied"
+      best_side: "Meilleur coté"
+      right_foot_juggles: "Jgl pied droit"
+      left_foot_juggles: "Jgl pied gauche"
+      head_juggles: "Jgl tête"
+      stamina: "Endurance"
+      speed: "Vitesse"
+      jump: "Détente"

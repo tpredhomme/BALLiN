@@ -1,21 +1,18 @@
 - if player
 
-	%nav.navbar.navbar-s2.fixed-bottom
+	%nav.navbar.navbar-s1.fixed-bottom.px-5
 		.d-flex.justify-content-between
 			= link_to fa_icon('user'), player, class: 'navbar-brand my-auto'
 			= link_to fa_icon('calendar'), calendars_path, class: 'navbar-brand my-auto'
-
-			= link_to fa_icon('trophy 2x'), League.find(1), class: 'navbar-brand my-auto'
-
 			= link_to fa_icon('users'), player.club, class: 'navbar-brand my-auto'
-			= link_to fa_icon('list-ol'), rankings_path, class: 'navbar-brand my-auto'
 
 - else
 
-	%nav.navbar.navbar-s1.fixed-bottom
-		.d-flex.justify-content-center.py-2
-			%strong.text-white.navbar-brand.my-auto= "JOIN US"
-			= link_to fa_icon('facebook'), @facebook_link, class: 'navbar-brand my-auto', target: '_blank'
-			= link_to fa_icon('instagram'), @instagram_link, class: 'navbar-brand my-auto', target: '_blank'
-			= link_to fa_icon('twitter'), @twitter_link, class: 'navbar-brand my-auto', target: '_blank'
-			= link_to fa_icon('youtube'), @youtube_link, class: 'navbar-brand my-auto', target: '_blank'
+	%nav.navbar.navbar-s1
+		.d-flex.justify-content-center.mt-1
+			= link_to fa_icon('facebook'), 'https://www.facebook.com/teamballinfc/', class: 'navbar-brand mx-2 my-auto text-white', target: '_blank'
+			= link_to fa_icon('instagram'), 'https://www.instagram.com/teamballinfc/', class: 'navbar-brand mx-2 my-auto text-white', target: '_blank'
+			= link_to fa_icon('twitter'), 'https://twitter.com/teamballinfc/', class: 'navbar-brand mx-2 my-auto text-white', target: '_blank'
+			= link_to fa_icon('youtube'), 'https://www.youtube.com/channel/UCTGeBrvb0Laoy368Qt6aUIw', class: 'navbar-brand mx-2 my-auto text-white', target: '_blank'
+		.d-flex.justify-content-center.my-1
+			.text-white= "© Copyright 2017. All rights reserved"

@@ -1,18 +1,23 @@
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row
+      .col.text-center
+        .card-title= 'Teams'
+        .card-subtitle= "#{@teams.count} teams."
+
 .card
   .card-block
-    
-    %h4.card-title= 'Teams'
-    %h6.card-subtitle.text-muted.mb-4= "#{@teams.count} teams."
+    .row
 
-    %table.w-100
-      %tbody
-        - @teams.each do |team|
-          %tr
-            %td= team.name
-            %td= team.club.name
-            %td= link_to fa_icon('eye' ), team
-            %td= link_to fa_icon('edit'), edit_team_path(team)
-            %td= link_to fa_icon('ban' ), team, method: :delete, data: { confirm: 'Are you sure?' }
+      %table.w-100
+        %tbody
+          - @teams.each do |team|
+            %tr
+              %td= team.name
+              %td= team.club.name
+              %td= link_to fa_icon('eye' ), team
+              %td= link_to fa_icon('edit'), edit_team_path(team)
+              %td= link_to fa_icon('ban' ), team, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br/
-= link_to 'New Team', new_team_path, class: 'btn btn-primary'
+    .row
+      = link_to 'New Team', new_team_path, class: 'btn btn-primary'

@@ -1,0 +1,5 @@
+- @player.game.order(:datetime).each do |game|
+	= render 'games/game', game: game
+
+- if @player.game.empty?
+	.card-text= "Pas de matches à venir pour #{@player.full_name}"

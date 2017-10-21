@@ -1,3 +1,16 @@
+.card.card-sp
+	.card-block
+
+		.row
+			.col-12.text-center= "#{@game.datetime.asctime}"
+			.col-12.text-center.font-bold= "#{@team_dom.category.name} - #{@team_dom.league.name} - #{@team_dom.level.name}".upcase
+
+		- if @game.finished?
+			.row.mb-0.text-center.font-thin.panel-gray.justify-content-between
+				.col.my-auto= fa_icon "futbol-o 1"
+				.col.font-big= @game.score
+				.col.my-auto= fa_icon "futbol-o 1"
+
 .card
 	.card-block
 		.row

@@ -1,14 +1,28 @@
-%table.table.table-inverse
-  %thead
-    %tr
-      %th #
-      %th Email
-      %th First Name
-      %th Last Name
-  %tbody
-    - @players.each do |player|
-      %tr
-        %th{:scope => "row"}= link_to player.id, player_path(player)
-        %td= player.email
-        %td= player.first_name
-        %td= player.last_name
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row
+      .col.text-center
+        .card-title= 'Players'
+        .card-subtitle= "#{@players.count} players."
+
+.card.card-sp
+  .card-block
+    .row
+
+      %table.w-100
+        %thead
+          %tr
+            %th #
+            %th Email
+            %th First Name
+            %th Last Name
+        %tbody
+          - @players.each do |player|
+            %tr
+              %th{:scope => "row"}= link_to player.id, player_path(player)
+              %td= player.email
+              %td= player.first_name
+              %td= player.last_name
+
+    .row
+      = link_to 'New Team', new_team_path, class: 'btn btn-primary'

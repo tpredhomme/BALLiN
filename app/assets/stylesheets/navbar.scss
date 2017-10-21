@@ -1,0 +1,27 @@
+.active {
+    background: #fee101;
+    font-weight: 900;
+}
+
+.navbar-brand {
+    margin: 0;
+}
+
+.navbar-s1 {
+    background: black;
+    text-align: center;
+    padding:    0;
+    border-bottom: 7px $primary solid;
+    a { color:      $white; }
+}
+
+.navbar-s2 {
+    background:     $primary;
+    padding-left:   10%;
+    padding-right:  10%;
+    a { color:      $secondary; }
+}
+
+.fixed-bottom {
+    border-bottom: 0;
+}

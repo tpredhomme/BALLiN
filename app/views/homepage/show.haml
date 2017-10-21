@@ -1,11 +1,38 @@
-.card.text-center.mt-5
-	%h6.jumbotron= "BALLiN"
-	.card-block
-		%h4.card-title= "Your career starts now."
+.card.card-sp
+	.card-block.text-center
+		.card-title= "Ta carrière ici et maintenant"
 
 		.card-text
-			= "Toutes nos félicitations et tous nos remerciement aux organisateurs, clubs et aux joueurs de cette deuxieme edition de la "
-			%strong= "Vinci Cup"
-			= ". Nous avons pu filmer plus de 50 matchs au cours de la competition. Nous allons mettre les videos en ligne dans la semaine. Suivez nous sur les reseaux sociaux @teamballinfc pour ne rien louper de VOTRE activité."
-		- link_to "M'inscrire.", new_player_registration_path, class: 'btn btn-primary my-3'
-		- link_to "Me connecter.", new_player_session_path, class: 'btn btn-secondary'
+			= "BALLiN est le premier réseau professionnel dédié au suivi des joueurs de football."
+
+		.text-center.mt-4
+			= link_to "M'inscrire", new_player_registration_path, class: 'btn btn-primary btn-block'
+			= link_to "Me connecter", new_player_session_path, class: 'btn btn-secondary btn-block'
+
+.card
+	.card-block
+		.row.text-center
+			.col-12.col-md-6.mb-4.mb-mb-0
+				.card-title= "Pourquoi BALLiN ?"
+				.card-text
+					= "Pour augmenter "
+					%strong= "ta visibilité "
+					= "auprès des agents et des recruteurs"
+
+				.card-text
+					= "Pour prendre en mains les "
+					%strong= "infos "
+					= "que "
+					%strong= "tu "
+					= "souhaites donner aux agents et aux recruteurs de France et de l'étrangers"
+
+			.col-12.col-md-6
+				.card-title= "Comment marche BALLiN ?"
+				.card-text
+					= "BALLiN s'appuie sur la force d'un réseau"
+				.card-text
+					= "Toi, le joueur, tu postes les informations sur tes matchs, tes performances et tes attributs"
+				.card-text
+					= "Nous, BALLiN, mettons à dispositions toutes ces informations aux recruteurs et agents de France et de l'étrangers"
+				.card-text
+					= "En plus de l'information que tu postes, nous venons à ta rencontre, filmer tes matchs pour avoir encore plus d'informations sur toi pour t'aider à vivre du football"

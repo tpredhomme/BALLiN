@@ -1,0 +1,39 @@
+.card.card-sp.pb-0
+	.card-block.pb-0
+		.row
+			.col.text-center
+				.card-title= 'Dashboard'
+				.card-subtitle= "Connected as ADMIN"
+
+.card.card-sp
+	.card-block
+		.row
+			.col
+				= link_to teams_path do
+					.panel-white
+						%h5= 'Teams'
+						= "#{Team.count} équipes"
+						%br/
+						%small.float-right
+							= link_to "show", teams_path
+							= link_to "create", new_team_path
+		
+			.col
+				= link_to clubs_path do
+					.panel-white
+						%h5= 'Clubs'
+						= "#{Club.count} clubs"
+						%br/
+						%small.float-right
+							= link_to "show", clubs_path
+							= link_to "create", new_club_path
+		
+			.col
+				= link_to players_path do
+					.panel-white
+						%h5= 'Players'
+						= "#{Player.count} players"
+						%br/
+						%small.float-right
+							= link_to "show", players_path
+			

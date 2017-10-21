@@ -1,4 +1,15 @@
-.card
-  %h6.jumbotron= 'Matches à venir'
-  .card-block
-    = image_tag @calendar, style: 'max-width: 100%;'
+.card.card-sp.pb-0
+	.card-block
+		.row
+			.col.text-center
+				.card-title= 'Matchs à venir'
+				.card-subtitle= player.team.club.name
+				.card-text= player.team.name
+
+.card.card-content
+	.card-block
+		- player.team.games.order(:datetime).each do |game|
+			= render 'games/game', game: game
+
+		- if player.team.games.empty?
+			.card-text= "Pas de matches à venir pour #{player.team.club.name}"

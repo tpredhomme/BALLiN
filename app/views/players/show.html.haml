@@ -1,13 +1,31 @@
-.card.text-center
-	%h6.jumbotron= 'Votre Profil'
+.card.card-sp.pb-0
+	.card-block.pb-0
+		.row
+			.col.text-center
+				.card-title= @player.full_name
+				.card-subtitle= @player.position.name.upcase
+				.card-text= "#{@player.age} ans. #{@player.height} cm."
+				
+				.player-team.mt-3
+					= fa_icon 'users'
+					= link_to @player.club.name, @player.club
+					= ", "
+					= link_to @player.team.name, @player.team
+
+
+		.row.mb-0
+			.col
+				%ul.nav.justify-content-center
+					%li.nav-item
+						= link_to 'Attributes', '?n=attributes', class: "nav-link #{'active' if params[:n] == 'attributes' || params[:n].nil?}"
+
+					%li.nav-item
+						= link_to 'Calendrier', '?n=calendar', class: "nav-link #{'active' if params[:n] == 'calendar'}"
+
+.card
 	.card-block
-		%span.player-position= @player.position.name
-		%br/
-		%h1.card-title.mt-4= @player.full_name
-		%h6.card-subtitle= @player.user_name
-		.card-text= "#{@player.age} ans. #{@player.height} cm."
-		.card-text.mt-3
-			= link_to @player.club.name, @player.club
-			%br/
-			= link_to @player.team.name, @player.team
-			
+		- if params[:n] == 'calendar'
+			= render 'calendar'
+
+		- else
+			= render 'attributes'

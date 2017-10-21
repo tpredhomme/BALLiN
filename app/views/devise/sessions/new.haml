@@ -1,25 +1,25 @@
-.card
-    %h6.jumbotron= "Log in"
+.card.card-sp
+    .card-block
+        .card-title= "Se connecter"
+        .card-subtitle= "Welcome back :)"
+
+.card.card-sp
     .card-block
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           
-            .field.mt-4
+            .form-group
                 = f.label :email
-                %br/
-                = f.email_field :email, autofocus: true
+                = f.email_field :email, autofocus: true, class: 'form-control'
 
-            .field.mt-4
+            .form-group
                 = f.label :password
-                %br/
-                = f.password_field :password, autocomplete: "off"
+                = f.password_field :password, autocomplete: "off", class: 'form-control'
 
             - if devise_mapping.rememberable?
-                .field
-                    = f.check_box :remember_me
-                    = f.label :remember_me
+                = f.check_box :remember_me
+                = f.label :remember_me
 
             .actions.mt-4
-                = f.submit "Me connecter.", class: 'btn btn-primary'
+                = f.submit "Me connecter", class: 'btn btn-primary btn-block'
 
-        .mt-4
-            = render "devise/shared/links"
+                = render "devise/shared/links"
