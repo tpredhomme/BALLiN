@@ -1,5 +1,21 @@
-%h1
-	= "Categories"
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row.mb-0
+      .col.text-center
+        .card-title= 'Categories'
+        .card-subtitle= "#{@categories.count} categories."
+    .row
+      = link_to 'New Category', new_category_path, class: 'btn btn-primary'
 
-- @categories.each do |category|
-	%p= link_to category.name, category
+.card
+  .card-block
+    .row
+
+      %table.w-100
+        %tbody
+          - @categories.each do |category|
+            %tr
+              %td= "Categorie : #{category.name}"
+              
+              %td= link_to fa_icon('edit'), edit_category_path(category)
+              %td= link_to fa_icon('ban' ), category, method: :delete, data: { confirm: 'Are you sure?' }

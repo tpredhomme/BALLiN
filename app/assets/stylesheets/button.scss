@@ -1,7 +1,9 @@
 .btn {
-    border-radius:  2px;
+    font-weight:    400;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     font-size:      13px;
-    font-weight: 400;
-    color: #292929;
-    margin: auto;
+    border-radius:  2px;
+    color:          $black;
+    margin:         auto;
 }

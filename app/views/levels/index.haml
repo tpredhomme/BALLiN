@@ -1,5 +1,21 @@
-%h1
-	= "Levels"
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row.mb-0
+      .col.text-center
+        .card-title= 'Levels'
+        .card-subtitle= "#{@levels.count} levels."
+    .row
+      = link_to 'New Level', new_level_path, class: 'btn btn-primary'
 
-- @levels.each do |level|
-	%p= link_to level.name, level
+.card
+  .card-block
+    .row
+
+      %table.w-100
+        %tbody
+          - @levels.each do |level|
+            %tr
+              %td= level.name
+              
+              %td= link_to fa_icon('edit'), edit_level_path(level)
+              %td= link_to fa_icon('ban' ), level, method: :delete, data: { confirm: 'Are you sure?' }

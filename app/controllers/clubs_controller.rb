@@ -43,6 +43,7 @@ class ClubsController < ApplicationController
 
   def destroy
     @club.destroy
+
     respond_to do |format|
       format.html { redirect_to clubs_url, notice: 'Club was successfully destroyed.' }
       format.json { head :no_content }

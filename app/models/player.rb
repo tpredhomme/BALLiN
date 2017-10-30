@@ -1,10 +1,10 @@
 #
 class Player < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
 
   belongs_to :team, required: false
-  belongs_to :club
+  belongs_to :club, required: false
 
   has_and_belongs_to_many :game
 
@@ -16,5 +16,14 @@ class Player < ApplicationRecord
 
   def player_name
     "#{number} #{full_name}"
+  end
+
+  def admin?
+    admin
+  end
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
   end
 end

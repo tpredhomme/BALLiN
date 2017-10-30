@@ -1,10 +1,10 @@
 - if player
-
-	%nav.navbar.navbar-s1.fixed-bottom.px-5
-		.d-flex.justify-content-between
-			= link_to fa_icon('user'), player, class: 'navbar-brand my-auto'
-			= link_to fa_icon('calendar'), calendars_path, class: 'navbar-brand my-auto'
-			= link_to fa_icon('users'), player.club, class: 'navbar-brand my-auto'
+	- unless player.admin?
+		%nav.navbar.navbar-s1.fixed-bottom.px-5
+			.d-flex.justify-content-between
+				= link_to fa_icon('user'), player, class: 'navbar-brand my-auto'
+				= link_to fa_icon('calendar'), calendars_path, class: 'navbar-brand my-auto'
+				= link_to fa_icon('users'), player.club, class: 'navbar-brand my-auto'
 
 - else
 

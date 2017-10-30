@@ -1,0 +1,14 @@
+.card.card-sp
+    .card-block
+        .card-title= "Category"
+
+.card.card-sp
+    .card-block
+        = form_for(category) do |f|
+          
+            .form-group
+                = f.label :name
+                = f.text_field :name, autofocus: true, class: 'form-control'
+
+            .actions
+                = f.submit class: 'btn btn-primary'

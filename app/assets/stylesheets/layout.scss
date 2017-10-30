@@ -1,6 +1,9 @@
 body {
     background-color: transparent;
-    font-size: 0.7rem;
+    font-family: "Roboto", "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #222222;
 }
 
 .wrapper {
@@ -9,7 +12,9 @@ body {
 
 a {
     color: $secondary;
-    &:hover { text-decoration: none !important; }
+    &:hover { 
+        text-decoration: none !important; 
+    }
 }
 
 .container {
@@ -21,11 +26,11 @@ a {
 }
 
 .panel-gray {
-    padding: 1rem;
-    background: #3a3a3a;
-    color: white;
-    margin: 4px;
-    border-radius: 2px;
+    padding:        1rem;
+    background:     #3a3a3a;
+    color:          white;
+    margin:         4px;
+    border-radius:  2px;
 
     &--label {
         font-size: 10px;
@@ -33,12 +38,12 @@ a {
 }
 
 .panel-white {
-    padding: 1rem;
-    background: white;
-    color: #3a3a3a;
-    border: 1px solid #3a3a3a;
-    margin: 4px;
-    border-radius: 2px;
+    padding:        1rem;
+    background:     white;
+    color:          #3a3a3a;
+    border:         1px solid #3a3a3a;
+    margin:         4px;
+    border-radius:  2px;
 
     &--label {
         font-size: 10px;

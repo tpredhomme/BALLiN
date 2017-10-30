@@ -1,6 +1,5 @@
 .card.card-sp
-  .card-block
-    
+  .card-block 
     .card-title= "S'inscrire"
     .card-subtitle= "C'est ici que ta carriere commence"
 
@@ -9,115 +8,78 @@
 
   .card.card-sp
     .card-block
-
       .row.mb-0
         .col-12
           .form-group
-            = f.label :email 
-            = f.email_field :email, autofocus: true, placeholder: "Enter email", class: 'form-control'
-            %small.form-text.text-muted= "We'll never share your email with anyone else."
+            = f.label "Nom de compte"
+            = f.text_field :email, autofocus: true, placeholder: "Pseudo", class: 'form-control', required: true
 
         .col-12
           .form-group
             = f.label 'Mot de passe'
-            = f.password_field :password, autocomplete: "off", placeholder: "Mot de passe", class: 'form-control'
+            = f.password_field :password, autocomplete: "off", placeholder: "Mot de passe", class: 'form-control', required: true
             %small.form-text.text-muted= "6 caractères minimum"
 
         .col-12
           .form-group
             = f.label 'Mdp confirmation'
-            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirmez mot de passe", class: 'form-control'
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirmez mot de passe", class: 'form-control', required: true
 
   .card.card-sp
-    .card-block
-      
+    .card-block    
       .row.mb-0
         .col-12
           .form-group
             = f.label 'Nom de Famille'
-            = f.text_field :first_name, class: 'form-control'
+            = f.text_field :first_name, class: 'form-control', required: true
           
         .col-12
           .form-group
             = f.label 'Prénom'
-            = f.text_field :last_name, class: 'form-control'
+            = f.text_field :last_name, class: 'form-control', required: true
 
         .col-12
           .form-group
-            = f.label :age
-            = f.text_field :age, class: 'form-control'
+            = f.label 'Date de naissance'
+            = f.date_field :birthday, class: 'form-control', required: true
         
         .col-12
           .form-group
             = f.label 'Taille'
-            = f.text_field :height, class: 'form-control'
+            = f.text_field :height, class: 'form-control', required: true
             %small.form-text.text-muted= "(en cm)"
       
   .card.card-sp
     .card-block
-
       .row.mb-0
         .col-12
           .form-group
-            = f.label :club
-            = f.collection_select(:club_id, Club.where(id: [17...49]), :id, :name, {}, { class: 'form-control' })
-
-        .col-12
-          .form-group
             = f.label :position
-            = f.collection_select(:position_id, Position.all, :id, :name, {}, { class: 'form-control' })
+            = f.collection_select(:position_id, Position.all, :id, :name, {}, { class: 'form-control', required: true })
 
         .col-12
           .form-group
             = f.label "Numero de maillot"
-            = f.text_field :number, class: 'form-control'
+            = f.text_field :number, class: 'form-control', required: true
 
   .card.card-sp
     .card-block
-      
       .row.mb-0
-        
         .col-12
           .form-group
-            = f.label "Meilleur pied"
-            = f.text_field :best_foot, class: 'form-control'
-        
-        .col-12
-          .form-group
-            = f.label "Coté préferé"
-            = f.text_field :best_side, class: 'form-control'
+            = fa_icon 'snapchat', class: 'mr-1'
+            = f.label "Snapchat"
+            = f.text_field :snapchat, class: 'form-control'
 
         .col-12
           .form-group
-            = f.label "Jongles pied droit"
-            = f.text_field :right_foot_juggles, class: 'form-control'
+            = fa_icon 'instagram', class: 'mr-1'
+            = f.label "Instagram"
+            = f.text_field :instagram, class: 'form-control'
 
-        .col-12
-          .form-group
-            = f.label "Jongles pied gauche"
-            = f.text_field :left_foot_juggles, class: 'form-control'
+  .card
+    .card-block
+      .actions
+        = f.submit "S'inscrire", class: "btn btn-primary btn-block"
 
-        .col-12
-          .form-group
-            = f.label "Jongles tête"
-            = f.text_field :head_juggles, class: 'form-control'
-          
-        .col-12
-          .form-group
-            = f.label "Endurance"
-            = f.text_field :stamina, class: 'form-control'
-
-        .col-12
-          .form-group
-            = f.label :"Vitesse"
-            = f.text_field :speed, class: 'form-control'
-
-        .col-12
-          .form-group
-            = f.label :"Detente"
-            = f.text_field :jump, class: 'form-control'
-
-  .actions
-    = f.submit "Sign up", class: "btn btn-primary btn-block mb-4"
-
-  = render "devise/shared/links"
+        = render "devise/shared/links"

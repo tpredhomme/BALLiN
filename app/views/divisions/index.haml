@@ -1,5 +1,22 @@
-%h1
-	= "Divisions"
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row
+      .col.text-center
+        .card-title= 'Divisions'
+        .card-subtitle= "#{@divisions.count} divisions."
 
-- @divisions.each do |division|
-	%p= link_to division.name, division
+.card
+  .card-block
+    .row
+
+      %table.w-100
+        %tbody
+          - @divisions.each do |division|
+            %tr
+              %td= division.name
+              
+              %td= link_to fa_icon('edit'), edit_division_path(division)
+              %td= link_to fa_icon('ban' ), division, method: :delete, data: { confirm: 'Are you sure?' }
+
+    .row
+      = link_to 'New Division', new_division_path, class: 'btn btn-primary'

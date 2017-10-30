@@ -1,14 +1,14 @@
 .card.card-sp.pb-0
 	.card-block.pb-0
 		.row
-			.col.text-center
+			.col
 				.card-title= @team.name
 				.card-subtitle= link_to @team.club.name, @team.club
-				.card-text= "#{@team.category.name} #{@team.level.name.upcase}"
+				.card-text= "#{@team.league.name} - #{@team.level.name} - #{@team.group.name} - #{@team.category.name} ".upcase
 
 		.row.mb-0
 			.col
-				%ul.nav.justify-content-center
+				%ul.nav
 					%li.nav-item
 						= link_to 'Effectif', '?n=effectif', class: "nav-link #{'active' if params[:n] == 'effectif' || params[:n].nil?}"
 
@@ -22,6 +22,9 @@
 				= render 'games/game', game: game
 		
 		- else
-			.text-center.col-12
+			.col-12.col-md-6
 				- @team.players.each do |player|
-					.panel-white= link_to player.full_name, player
+					= link_to player do
+						.panel-white
+							%div= player.full_name
+							%small= player.position.name

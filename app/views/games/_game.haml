@@ -4,7 +4,7 @@
 .mb-3
 	%small.pl-1
 		= fa_icon 'clock-o'
-		= game.datetime.try(:asctime) || "unclear"
+		= game.datetime.try(:asctime) || "N/A"
 
 	= link_to game do
 		.row.panel-gray

@@ -10,22 +10,20 @@
     }
 
     .card-title {
-        font-size: 24px;
-        font-weight: 400;
+        font-size: 1.9rem;
+        font-weight: 600;
     }
 
-.card-subtitle {
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 12px;
-}
+    .card-subtitle {
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-size: 21px;
+        margin-bottom: 1rem;
+    }
 
-    .card-text {
-        text-align: center;   
-        font-size: .8rem;
-        color: #a2a2a2;
-        font-weight: 200;
+    .card-text {  
+        color: #333;
     }
 }
 
@@ -35,8 +33,4 @@
 
 .card-sp {
     border-bottom: 1px solid #e2e2e2
-}
-
-.card-content {
-    // background: #ececec;
 }

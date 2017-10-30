@@ -10,10 +10,6 @@ class Players::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    # TOFIX : Rush VinciCup -> Deso je me sens sale.
-    player_params = params[:player]
-
-    player_params[:team_id] = Club.find(player_params[:club_id]).teams.first.id
     super
   end
 
@@ -49,8 +45,8 @@ class Players::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:club_id, :team_id, :age, :position_id, :height, :weight, :best_foot, :best_side, :right_foot_juggles, :left_foot_juggles, :head_juggles, :stamina, :speed, :jump])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:club_id, :team_id, :age, :position_id, :height, :weight, :best_foot, :best_side, :right_foot_juggles, :left_foot_juggles, :head_juggles, :stamina, :speed, :jump])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:club_id, :team_id, :age, :position_id, :height, :weight, :best_foot, :best_side, :right_foot_juggles, :left_foot_juggles, :head_juggles, :stamina, :speed, :jump, :birthday, :number, :snapchat, :instagram])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:club_id, :team_id, :age, :position_id, :height, :weight, :best_foot, :best_side, :right_foot_juggles, :left_foot_juggles, :head_juggles, :stamina, :speed, :jump, :birthday, :number, :snapchat, :instagram])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

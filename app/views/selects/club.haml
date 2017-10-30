@@ -1,0 +1,17 @@
+.card.card-sp
+    .card-block
+    
+        .card-title= "Choisis ton club"
+        .card-subtitle= "Dis-nous pour qui tu joues"
+
+
+.card.card-sp
+    .card-block
+
+        .row.mb-0
+            .col
+                - @clubs.each do |club|
+                    = link_to selects_team_path(id: club.id) do
+                        .panel-gray
+                            %div= "#{club.name}"
+                            %small= "#{club.teams.count} équipes"

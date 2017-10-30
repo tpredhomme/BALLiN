@@ -1,0 +1,38 @@
+.card.card-sp
+    .card-block
+        .card-title= "Team"
+
+.card.card-sp
+    .card-block
+        = form_for(team) do |f|
+          
+            .form-group
+                = f.label :name
+                = f.text_field :name, autofocus: true, class: 'form-control'
+            
+            .form-group
+                = f.label :club
+                = f.collection_select(:club_id, Club.all, :id, :name, {}, { class: 'form-control' })
+
+            .form-group
+                = f.label :category
+                = f.collection_select(:category_id, Category.all, :id, :name, {}, { class: 'form-control' })
+
+            .form-group
+                = f.label :league
+                = f.collection_select(:league_id, League.all, :id, :name, {}, { class: 'form-control' })
+                
+            .form-group
+                = f.label :level
+                = f.collection_select(:level_id, Level.all, :id, :name, {}, { class: 'form-control' })
+            
+            .form-group
+                = f.label :division
+                = f.collection_select(:division_id, Division.all, :id, :name, {}, { class: 'form-control' })
+      
+            .form-group
+                = f.label :group
+                = f.collection_select(:group_id, Group.all, :id, :name, {}, { class: 'form-control' })
+
+            .actions
+                = f.submit class: 'btn btn-primary'

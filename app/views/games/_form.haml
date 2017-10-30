@@ -1,24 +1,21 @@
-= form_for(@game) do |f|
-	- if @game.errors.any?
-		#error_explanation
-			%h2= "#{pluralize(calendar.errors.count, "error")} prohibited this calendar from being saved:"
+.card.card-sp
+    .card-block
+        .card-title= "Game"
 
-		%ul
-			- calendar.errors.full_messages.each do |message|
-				%li= message
+.card.card-sp
+    .card-block
+        = form_for(@game) do |f|
+            .form-group
+                = f.label "Label"
+                = f.text_field :name, autofocus: true, class: 'form-control'
 
+            .form-group
+                = f.label :datetime
+                = f.datetime_field(:datetime, { class: 'form-control' })
 
-	.field
-		= f.label :day
-		= f.text_field :day
+            .form-group
+                = f.label "Equipes"
+                = f.select(:teams, Team.all.collect {|t| ["#{t.club.name} #{t.name}", t.id]}, {}, { class: 'form-control', multiple: true, style: 'height: 400px;' })
 
-	.field
-		= f.label :date
-		= f.date_field(:date)
-
-	.field
-		= f.label :datetime
-		= f.datetime_field(:datetime)
-
-	.actions
-		= f.submit class: 'btn btn-primary'
+            .actions
+                = f.submit class: 'btn btn-primary'

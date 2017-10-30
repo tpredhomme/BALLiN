@@ -1,15 +1,14 @@
-= form_for(club) do |f|
-  - if club.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(club.errors.count, 'error')} prohibited this club from being saved: "
+.card.card-sp
+    .card-block
+        .card-title= "Club"
 
-      %ul
-        - club.errors.full_messages.each do |message|
-          %li= message
+.card.card-sp
+    .card-block
+        = form_for(club) do |f|
+          
+            .form-group
+                = f.label :name
+                = f.text_field :name, autofocus: true, class: 'form-control'
 
-  .field
-    = f.label :name
-    = f.text_field :name
-
-  .actions
-    = f.submit class: 'btn btn-primary'
+            .actions
+                = f.submit class: 'btn btn-primary'

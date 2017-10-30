@@ -1,20 +1,22 @@
-%p#notice= notice
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row.mb-0
+      .col.text-center
+        .card-title= 'Game'
+        .card-subtitle= "#{@games.count} games."
+    .row
+      = link_to 'New Game', new_game_path, class: 'btn btn-primary'
 
 .card
   .card-block
-    %h4.card-title= 'Games'
-    
-    %table.w-100
-      %thead
-        %tr
-          %th= 'Name'
-          %th{ colspan: '2' }
+    .row
 
-      %tbody
-        - @games.each do |game|
-          %tr
-            %td= link_to game.name, game
-            %td= link_to 'Edit', edit_game_path(game)
-            %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
-
-    = link_to 'New game', new_game_path, class: 'btn btn-primary btn-block mt-5'
+      %table.w-100
+        %tbody
+          - @games.each do |game|
+            %tr
+              %td= "#{game.name}"
+              
+              %td= link_to fa_icon('eye'), game
+              %td= link_to fa_icon('edit'), edit_game_path(game)
+              %td= link_to fa_icon('ban' ), game, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,14 +1,14 @@
 .card.card-sp.pb-0
 	.card-block.pb-0
 		.row
-			.col.text-center
+			.col
 				.card-title= @club.name
 				.card-subtitle= @club.adress
 				.card-text= @club.fields
 
 		.row.mb-0
 			.col
-				%ul.nav.justify-content-center
+				%ul.nav
 					%li.nav-item
 						= link_to 'Equipes', '', class: 'nav-link active'
 
@@ -19,4 +19,5 @@
 				- @club.teams.each do |team|
 					= link_to team do
 						.panel-gray
-							= "#{team.category.name} - #{team.level.name} - #{team.name}".upcase
+							%div= "#{team.name}"
+							%small= "#{team.league.name} - #{team.level.name} - #{team.group.name} - #{team.category.name} ".upcase

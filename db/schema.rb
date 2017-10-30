@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171021021450) do
+ActiveRecord::Schema.define(version: 20171030051801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,17 +103,18 @@ ActiveRecord::Schema.define(version: 20171021021450) do
     t.integer "booked_items",                default: 0,  null: false
     t.string  "reference"
     t.integer "items_count",                 default: 1,  null: false
+    t.index ["label", "logistic_id"], name: "index_campaign_logistic_products_on_label_and_logistic_id", unique: true, using: :btree
   end
 
   create_table "campaign_logistic_slots", force: :cascade do |t|
-    t.integer  "logistic_id",     default: 0, null: false
-    t.integer  "available_items", default: 0, null: false
-    t.integer  "booked_items",    default: 0, null: false
+    t.integer  "logistic_id",     default: 0,    null: false
+    t.integer  "available_items", default: 0,    null: false
+    t.integer  "booked_items",    default: 0,    null: false
     t.integer  "duration"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.text     "location"
-    t.integer  "items_count",     default: 1, null: false
+    t.integer  "items_count",     default: 1,    null: false
+    t.jsonb    "location",        default: "{}"
   end
 
   create_table "campaign_logistics", force: :cascade do |t|
@@ -125,9 +126,9 @@ ActiveRecord::Schema.define(version: 20171021021450) do
     t.integer  "duration"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.text     "location"
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
+    t.jsonb    "location",                default: "{}"
     t.index ["segment_id"], name: "index_campaign_logistics_on_segment_id", using: :btree
   end
 
@@ -774,7 +775,6 @@ ActiveRecord::Schema.define(version: 20171021021450) do
     t.integer  "club_id"
     t.integer  "team_id"
     t.integer  "position_id"
-    t.integer  "age"
     t.integer  "height"
     t.integer  "weight"
     t.integer  "number"
@@ -788,6 +788,9 @@ ActiveRecord::Schema.define(version: 20171021021450) do
     t.string   "jump"
     t.integer  "game_id"
     t.boolean  "admin",                  default: false
+    t.string   "snapchat"
+    t.string   "instagram"
+    t.datetime "birthday"
     t.index ["club_id"], name: "index_players_on_club_id", using: :btree
     t.index ["email"], name: "index_players_on_email", unique: true, using: :btree
     t.index ["game_id"], name: "index_players_on_game_id", using: :btree
@@ -800,6 +803,12 @@ ActiveRecord::Schema.define(version: 20171021021450) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "seed_migration_data_migrations", force: :cascade do |t|
+    t.string   "version"
+    t.integer  "runtime"
+    t.datetime "migrated_on"
   end
 
   create_table "taxonomies", id: :bigserial, force: :cascade do |t|
@@ -853,8 +862,8 @@ ActiveRecord::Schema.define(version: 20171021021450) do
   end
 
   create_table "user_accounts", id: :bigserial, force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name",              limit: 50,                                          null: false
+    t.string   "last_name",               limit: 50,                                          null: false
     t.string   "email"
     t.string   "phone_number"
     t.string   "city"

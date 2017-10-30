@@ -1,0 +1,21 @@
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row
+      .col.text-center
+        .card-title= 'Positions'
+        .card-subtitle= "#{@positions.count} positions."
+
+.card
+  .card-block
+    .row
+
+      %table.w-100
+        %tbody
+          - @positions.each do |position|
+            %tr
+              %td= position.name
+              %td= link_to fa_icon('edit'), edit_position_path(position)
+              %td= link_to fa_icon('ban' ), position, method: :delete, data: { confirm: 'Are you sure?' }
+
+    .row
+      = link_to 'New Position', new_position_path, class: 'btn btn-primary'

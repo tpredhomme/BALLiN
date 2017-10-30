@@ -1,10 +1,22 @@
+.card.card-sp.pb-0
+  .card-block.pb-0
+    .row.mb-0
+      .col.text-center
+        .card-title= 'Groups'
+        .card-subtitle= "#{@groups.count} groups."
+
+    .row
+      = link_to 'New Group', new_group_path, class: 'btn btn-primary'
+
 .card
-	.card-block
-		%h1
-			= "Groups"
-			
-.card
-	%ul.list-group.list-group-flush
-		- @groups.each do |group|
-			%li.list-group-item= link_to group.name, group
-    	
+  .card-block
+    .row
+
+      %table.w-100
+        %tbody
+          - @groups.each do |group|
+            %tr
+              %td= group.name
+              
+              %td= link_to fa_icon('edit'), edit_group_path(group)
+              %td= link_to fa_icon('ban' ), group, method: :delete, data: { confirm: 'Are you sure?' }

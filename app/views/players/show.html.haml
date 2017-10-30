@@ -1,7 +1,7 @@
 .card.card-sp.pb-0
 	.card-block.pb-0
 		.row
-			.col.text-center
+			.col
 				.card-title= @player.full_name
 				.card-subtitle= @player.position.name.upcase
 				.card-text= "#{@player.age} ans. #{@player.height} cm."
@@ -15,7 +15,7 @@
 
 		.row.mb-0
 			.col
-				%ul.nav.justify-content-center
+				%ul.nav
 					%li.nav-item
 						= link_to 'Attributes', '?n=attributes', class: "nav-link #{'active' if params[:n] == 'attributes' || params[:n].nil?}"
 

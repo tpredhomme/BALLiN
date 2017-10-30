@@ -7,18 +7,38 @@
 
 .card.card-sp
 	.card-block
-		.row
-			.col
-				= link_to teams_path do
+		.row			
+			.col-12.col-md-4
+				= link_to players_path do
 					.panel-white
-						%h5= 'Teams'
-						= "#{Team.count} équipes"
+						%h5= 'Players'
+						= "#{Player.count} players"
 						%br/
 						%small.float-right
-							= link_to "show", teams_path
-							= link_to "create", new_team_path
-		
-			.col
+							= link_to "show", players_path
+
+			.col-12.col-md-4
+				= link_to positions_path do
+					.panel-white
+						%h5= 'Positions'
+						= "#{Position.count} positions"
+						%br/
+						%small.float-right
+							= link_to "show", positions_path
+
+			.col-12.col-md-4
+				= link_to games_path do
+					.panel-white
+						%h5= 'Matchs'
+						= "#{Game.count} matchs"
+						%br/
+						%small.float-right
+							= link_to "show", games_path
+
+.card.card-sp
+	.card-block
+		.row
+			.col-12.col-md-4
 				= link_to clubs_path do
 					.panel-white
 						%h5= 'Clubs'
@@ -27,13 +47,62 @@
 						%small.float-right
 							= link_to "show", clubs_path
 							= link_to "create", new_club_path
-		
-			.col
-				= link_to players_path do
+			.col-12.col-md-4
+				= link_to teams_path do
 					.panel-white
-						%h5= 'Players'
-						= "#{Player.count} players"
+						%h5= 'Teams'
+						= "#{Team.count} équipes"
 						%br/
 						%small.float-right
-							= link_to "show", players_path
-			
+							= link_to "show", teams_path
+							= link_to "create", new_team_path
+
+.card.card-sp
+	.card-block
+		.row
+			.col-12.col-md-4
+				= link_to leagues_path do
+					.panel-white
+						%h5= 'Leagues'
+						= "#{League.count} leagues"
+						%br/
+						%small.float-right
+							= link_to "show", leagues_path
+
+			.col-12.col-md-4
+				= link_to categories_path do
+					.panel-white
+						%h5= 'Categories'
+						= "#{Category.count} categories"
+						%br/
+						%small.float-right
+							= link_to "show", categories_path
+
+			.col-12.col-md-4
+				= link_to levels_path do
+					.panel-white
+						%h5= 'Level'
+						= "#{Level.count} levels"
+						%br/
+						%small.float-right
+							= link_to "show", levels_path
+
+
+			.col-12.col-md-4
+				= link_to divisions_path do
+					.panel-white
+						%h5= 'Divisions'
+						= "#{Division.count} divisions"
+						%br/
+						%small.float-right
+							= link_to "show", divisions_path
+
+
+			.col-12.col-md-4
+				= link_to groups_path do
+					.panel-white
+						%h5= 'Group'
+						= "#{Group.count} groups"
+						%br/
+						%small.float-right
+							= link_to "show", groups_path

@@ -1,37 +1,44 @@
+.card.card-sp.mt-0
+	.card-block
+		.card-title= "TA CARRIERE, MAINTENANT."
+
+		.card-subtitle
+			= "BALLIN est le premier réseau professionnel dédié à la détection et au suivi des joueurs de football professionnels de demain"
+
+		.mt-4
+			= link_to "M'inscrire", new_player_registration_path, class: 'btn btn-primary btn-lg'
+			= link_to "Me connecter", new_player_session_path, class: 'btn btn-secondary btn-lg'
+
 .card.card-sp
-	.card-block.text-center
-		.card-title= "Ta carrière ici et maintenant"
+	.card-block
+		.row.mb-0
+			.col-12
+				.card-subtitle= fa_icon("futbol-o", class: 'mr-2') + "Pourquoi BALLIN ?"
+				.card-text= "Pour augmenter TA VISIBILITE auprès des agents et des recruteurs"
+				%br/
+				.card-text= "Pour prendre en main les INFOS que TU souhaites donner aux agents et aux recruteurs de France et de l’étranger"
+				%br/
+				.card-text= "Pour maximiser TES CHANCES de vivre du football sur le long terme"
+				%br/
+				.card-text= "Pour la FORCE du RESEAU #teamballinfc"
 
-		.card-text
-			= "BALLiN est le premier réseau professionnel dédié au suivi des joueurs de football."
 
-		.text-center.mt-4
-			= link_to "M'inscrire", new_player_registration_path, class: 'btn btn-primary btn-block'
-			= link_to "Me connecter", new_player_session_path, class: 'btn btn-secondary btn-block'
 
 .card
 	.card-block
-		.row.text-center
-			.col-12.col-md-6.mb-4.mb-mb-0
-				.card-title= "Pourquoi BALLiN ?"
-				.card-text= "Pour augmenter TA VISIBILITE auprès des agents et des recruteurs"
-				.card-text= "------"
-				.card-text= "Pour prendre en main les INFOS que TU souhaites donner aux agents et aux recruteurs de France et de l’étranger"
-				.card-text= "------"
-				.card-text= "Pour maximiser TES CHANCES de vivre du football sur le long terme"
-				.card-text= "------"
-				.card-text= "Pour la FORCE du RESEAU #teamballinfc"
-
-			.col-12.col-md-6
-				.card-title= "Comment marche BALLiN ?"
-				.card-text= "BALLIN s’appuie sur la force d’un réseau joueurs-clubs-agents"
-				.card-text= "------"
-				.card-text= "Toi, le joueur, tu postes les informations sur tes matchs, tes performances, tes attributs c’est simple, rapide et fun ☺"
-				.card-text= "------"
-				.card-text= "Nous, les BALLIN BOYZ, mettons à disposition toutes ces informations aux recruteurs et agents de France et de l’étranger"
-				.card-text= "------"
-				.card-text= "En plus de l’information que tu postes, nous venons à ta rencontre filmer tes matchs pour avoir encore plus d’informations sur toi pour t’aider à vivre du football"
-				.card-text= "------"
-				.card-text= "Plus tu postes d’infos, plus nous venons à ta rencontre filmer tes matchs, en faisant des montages de tes de tes meilleurs actions ! #ballintv"
-				.card-text= "------"
-				.card-text= "Enfin, nous, BALLIN, construisons des partenariats avec les entreprises pour trouver des emplois et des stages adaptés à la pratique du football"
+		.row.mb-0
+			.col-12
+				.row.mb-0
+					.col-xs-12
+						.card-subtitle= fa_icon("futbol-o", class: 'mr-2') + "Comment marche BALLIN ?"
+						.card-text= "BALLIN s’appuie sur la force d’un réseau joueurs-clubs-agents"
+						%br/
+						.card-text= "Toi, le joueur, tu postes les informations sur tes matchs, tes performances, tes attributs c’est simple, rapide et fun ☺"
+						%br/
+						.card-text= "Nous, les BALLIN BOYZ, mettons à disposition toutes ces informations aux recruteurs et agents de France et de l’étranger"
+						%br/
+						.card-text= "En plus de l’information que tu postes, nous venons à ta rencontre filmer tes matchs pour avoir encore plus d’informations sur toi pour t’aider à vivre du football"
+						%br/
+						.card-text= "Plus tu postes d’infos, plus nous venons à ta rencontre filmer tes matchs, en faisant des montages de tes de tes meilleurs actions ! #ballintv"
+						%br/
+						.card-text= "Enfin, nous, BALLIN, construisons des partenariats avec les entreprises pour trouver des emplois et des stages adaptés à la pratique du football"

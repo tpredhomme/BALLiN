@@ -1,6 +1,6 @@
 .active {
-    background: #fee101;
-    font-weight: 900;
+    background:     #fee101;
+    font-weight:    900;
 }
 
 .navbar-brand {
@@ -8,18 +8,21 @@
 }
 
 .navbar-s1 {
-    background: black;
-    text-align: center;
-    padding:    0;
-    border-bottom: 7px $primary solid;
-    a { color:      $white; }
+    background:     black;
+    text-align:     center;
+    padding:        0;
+    a { 
+        color: $white; 
+    }
 }
 
 .navbar-s2 {
     background:     $primary;
     padding-left:   10%;
     padding-right:  10%;
-    a { color:      $secondary; }
+    a { 
+        color: $secondary; 
+    }
 }
 
 .fixed-bottom {

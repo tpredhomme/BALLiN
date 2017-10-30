@@ -1,25 +1,31 @@
 Rails.application.routes.draw do
   devise_for :players, controllers: { registrations: 'players/registrations' }
 
+  resources :players
+  resources :games
+  resources :positions
+
   resources :clubs
+  resources :teams
+
   resources :categories
   resources :levels
   resources :divisions
   resources :groups
-  resources :teams
-  resources :players
 
   resources :calendars
   resources :leagues
   resources :days
-  resources :games
 
   resources :rankings
 
+  get 'selects/club'
+  get 'selects/team'
+  resources :selects, only: :create
+
   get 'enter_games/create'
 
-  resources :admin
+  resources :admin, only: :index
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homepage#show'
 end
