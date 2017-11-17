@@ -1,7 +1,8 @@
 .card.card-sp
   .card-block 
     .card-title= "S'inscrire"
-    .card-subtitle= "C'est ici que ta carriere commence"
+    .card-subtitle= "C’est grace à ces informations que nous pourrons t’identifier sur les videos :)"
+    .card-subtitle= "Remplis les bien !"
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
@@ -22,7 +23,7 @@
 
         .col-12
           .form-group
-            = f.label 'Mdp confirmation'
+            = f.label 'Confirmation du mot de passe'
             = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirmez mot de passe", class: 'form-control', required: true
 
   .card.card-sp
