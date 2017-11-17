@@ -15,7 +15,7 @@
         %tbody
           - @games.each do |game|
             %tr
-              %td= "#{game.name}"
+              %td= "Game #{game.id}"
               
               %td= link_to fa_icon('eye'), game
               %td= link_to fa_icon('edit'), edit_game_path(game)
