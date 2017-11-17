@@ -13,5 +13,5 @@
                 - @teams.each do |team|
                     = link_to selects_path(club_id: params[:id], team_id: team.id), method: :post do
                         .panel-gray
-                            %div= "#{team.name} - #{team.category} - #{team.division} - #{team.level}"
+                            %div= "#{team.name} - #{team.category.name} - #{team.division.name} - #{team.level.name}"
                             %small= "#{team.players.count} joueurs"
