@@ -50,18 +50,10 @@
             = f.text_field :height, class: 'form-control', required: true
             %small.form-text.text-muted= "(en cm)"
       
-  .card.card-sp
-    .card-block
-      .row.mb-0
         .col-12
           .form-group
             = f.label :position
             = f.collection_select(:position_id, Position.all, :id, :name, {}, { class: 'form-control', required: true })
-
-        .col-12
-          .form-group
-            = f.label "Numero de maillot"
-            = f.text_field :number, class: 'form-control', required: true
 
   .card.card-sp
     .card-block

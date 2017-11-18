@@ -18,7 +18,7 @@
 .card
 	.card-block
 		- if params[:n] == 'calendar'
-			.col-12.col-md-6
+			.col-12
 				- if @team.games.count.zero?
 					.card-text= "Pas de matches à venir pour #{@team.name}"
 				-else
