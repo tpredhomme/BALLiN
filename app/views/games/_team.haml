@@ -1,13 +1,21 @@
-%strong= link_to team.club.name, team.club
-%h8= link_to team.name, team
+
+.small.mb-1= link_to team.name, team
+.card-subtitle= link_to team.club.name, team.club
 
 .mt-4
 .row
 	.col-12
 		- @game.players.each do |player|
-			%p= link_to player.player_name, player if team == player.team
+			- if team == player.team
+				.panel-white
+					= link_to player.player_name, player
 		
 .row
 	.col-12
 		- if player.team == team && !@game.players.include?(player)
-			= link_to "I'll play !", enter_games_create_path(game_id: @game.id, player_id: player.id), class: 'btn btn-primary btn-block' 
+			= form_for :game_params, url: enter_games_create_path, method: :get do |f|
+				= f.hidden_field :game_id, value: @game.id
+				= f.hidden_field :player_id, value: player.id
+
+				= f.text_field :numero, placeholder: 'Numéro de maillot', required: true, autofocus: true, class: 'form-control'
+				= f.submit "Je vais jouer !", class: 'btn btn-primary btn-block' 

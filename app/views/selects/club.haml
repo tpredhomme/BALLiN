@@ -11,6 +11,7 @@
         .row.mb-0
             .col
                 - @clubs.each do |club|
+                    - next if club.teams.count.zero?
                     = link_to selects_team_path(id: club.id) do
                         .panel-gray
                             %div= "#{club.name}"

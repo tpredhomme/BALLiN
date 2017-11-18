@@ -15,7 +15,7 @@ class Player < ApplicationRecord
   end
 
   def player_name
-    "#{number} #{full_name}"
+    "#{number} - #{full_name} - #{position.name}"
   end
 
   def admin?
