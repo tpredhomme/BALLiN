@@ -18,13 +18,20 @@
 .card
 	.card-block
 		- if params[:n] == 'calendar'
-			- @team.games.each do |game|
-				= render 'games/game', game: game
+			- if @team.games.count.zero?
+				.card-text= "Pas de matches à venir pour #{@team.name}"
+			-else
+				- @team.games.each do |game|
+					= render 'games/game', game: game
 		
 		- else
 			.col-12.col-md-6
-				- @team.players.each do |player|
-					= link_to player do
-						.panel-white
-							%div= player.full_name
-							%small= player.position.name
+				- if @team.players.count.zero?
+					.card-text= "Pas de joueurs inscrit pour #{@team.name}"
+				
+				- else
+					- @team.players.each do |player|
+						= link_to player do
+							.panel-white
+								%div= player.full_name
+								%small= player.position.name
