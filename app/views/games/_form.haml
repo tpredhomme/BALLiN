@@ -11,7 +11,7 @@
 
             .form-group
                 = f.label "Equipes"
-                = f.select(:teams, Team.all.collect {|t| ["##{t.id} - #{t.club.name} - #{t.name}", t.id]}, {}, { class: 'form-control', multiple: true, style: 'height: 400px;' })
+                = f.select(:teams, Team.order(id: :asc).collect {|t| ["##{t.id} - #{t.name} - #{t.division.name}", t.id]}, {}, { class: 'form-control', multiple: true, style: 'height: 400px;' })
 
             .actions
                 = f.submit class: 'btn btn-primary'

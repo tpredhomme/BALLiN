@@ -6,13 +6,24 @@
 		= fa_icon 'clock-o'
 		= game.datetime.try(:asctime) || "N/A"
 
-	= link_to game do
-		.row.panel-gray
-			.col
-				%div= team_dom.club.name
-				.small= team_dom.name
+	- if player.game.include? game
+		= link_to game do
+			.row.panel-gray
+				.col
+					%div= team_dom.club.name
+					.small= team_dom.name
 
-			.col.text-right
-				%div= team_ext.club.name
-				.small= team_ext.name
+				.col.text-right
+					%div= team_ext.club.name
+					.small= team_ext.name
 
+	- else
+		= link_to game do
+			.row.panel-white
+				.col
+					%div= team_dom.club.name
+					.small= team_dom.name
+
+				.col.text-right
+					%div= team_ext.club.name
+					.small= team_ext.name

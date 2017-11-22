@@ -15,8 +15,11 @@
         %tbody
           - @games.each do |game|
             %tr
-              %td= "Game #{game.id}"
+              %td= "##{game.id}"
+              %td
+                = "#{game.teams.first.name}"
+                %span.strong= ' vs '
+                = "#{game.teams.second.name}"
               
               %td= link_to fa_icon('eye'), game
-              %td= link_to fa_icon('edit'), edit_game_path(game)
               %td= link_to fa_icon('ban' ), game, method: :delete, data: { confirm: 'Are you sure?' }

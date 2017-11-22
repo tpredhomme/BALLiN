@@ -8,7 +8,7 @@
 
 .card.card-content
 	.card-block
-		- player.team.games.order(:datetime).each do |game|
+		- player.team.games.order(datetime: :desc).each do |game|
 			= render 'games/game', game: game
 
 		- if player.team.games.empty?

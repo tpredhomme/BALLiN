@@ -19,4 +19,5 @@
               %td= player.first_name
               %td= player.last_name
               
+              %td= link_to fa_icon('eye' ), player_path(player, bypass: true)
               %td= link_to fa_icon('ban' ), player, method: :delete, data: { confirm: 'Are you sure?' }

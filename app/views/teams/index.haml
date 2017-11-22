@@ -10,9 +10,15 @@
     .row
 
       %table.w-100
+        %thead
+          %tr
+            %th= "#"
+            %th= "Team"
+            %th= "Club"
         %tbody
           - @teams.each do |team|
             %tr
+              %td= team.id
               %td= team.name
               %td= team.club.name
               %td= link_to fa_icon('eye' ), team

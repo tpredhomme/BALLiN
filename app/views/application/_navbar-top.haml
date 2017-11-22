@@ -1,7 +1,8 @@
 %nav.navbar.navbar-s1.bg-white.fixed-top
 	.d-flex.justify-content-center
 		
-		= link_to root_path, class: 'navbar-brand mr-auto' do
+		- navbar_brand_link = (!player || !player.try(:admin)) ? root_path : admin_index_path
+		= link_to navbar_brand_link, class: 'navbar-brand mr-auto' do
 			= image_tag 'logo/logo.svg', size: '110x50'
 		- if player
 			= link_to('Logout', destroy_player_session_path, method: :delete, class: 'my-auto mr-4')
