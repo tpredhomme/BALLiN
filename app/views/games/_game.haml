@@ -6,7 +6,7 @@
 		= fa_icon 'clock-o'
 		= game.datetime.try(:asctime) || "N/A"
 
-	- if player.game.include? game
+	- if cplayer.game.include? game
 		= link_to game do
 			.row.panel-gray
 				.col
