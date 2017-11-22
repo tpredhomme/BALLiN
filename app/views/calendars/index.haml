@@ -9,7 +9,7 @@
 .card.card-content
 	.card-block
 		- player.team.games.order(datetime: :desc).each do |game|
-			= render 'games/game', game: game
+			= render 'games/game', game: game, cplayer: player
 
 		- if player.team.games.empty?
 			.card-text= "Pas de matches à venir pour #{player.team.club.name}"
