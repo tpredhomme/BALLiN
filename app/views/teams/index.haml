@@ -4,6 +4,8 @@
       .col.text-center
         .card-title= 'Teams'
         .card-subtitle= "#{@teams.count} teams."
+    .row
+      = link_to 'New Team', new_team_path, class: 'btn btn-primary'
 
 .card
   .card-block
@@ -24,6 +26,3 @@
               %td= link_to fa_icon('eye' ), team
               %td= link_to fa_icon('edit'), edit_team_path(team)
               %td= link_to fa_icon('ban' ), team, method: :delete, data: { confirm: 'Are you sure?' }
-
-    .row
-      = link_to 'New Team', new_team_path, class: 'btn btn-primary'
