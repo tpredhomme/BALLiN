@@ -17,12 +17,16 @@
             %th= "#"
             %th= "Team"
             %th= "Club"
+            %th= "Division"
+            %th
+            %th
         %tbody
           - @teams.each do |team|
             %tr
               %td= team.id
               %td= team.name
               %td= team.club.name
+              %td= team.division.name
               %td= link_to fa_icon('eye' ), team
               %td= link_to fa_icon('edit'), edit_team_path(team)
               %td= link_to fa_icon('ban' ), team, method: :delete, data: { confirm: 'Are you sure?' }
