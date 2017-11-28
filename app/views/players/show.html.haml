@@ -9,8 +9,9 @@
 				.player-team.mt-3
 					= fa_icon 'users'
 					= link_to @player.club.name, @player.club
-					= ", "
+					= " - "
 					= link_to @player.team.name, @player.team
+					= "- #{@player.team.division.name}"
 
 
 		.row.mb-0

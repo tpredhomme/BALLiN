@@ -12,12 +12,22 @@
     .row
 
       %table.w-100
+        %thead
+          %th= 'Name'
+          %th= 'Firstname'
+          %th= 'Lastname'
+          %th= 'Club'
+          %th= 'Division'
+          %th= 'Category'
         %tbody
           - @players.each do |player|
             %tr
               %td= player.email
               %td= player.first_name
               %td= player.last_name
+              %td= player.try(:club).try(:name) || '-'
+              %td= player.try(:team).try(:division).try(:name) || '-'
+              %td= player.try(:team).try(:category).try(:name) || '-'
               
               %td= link_to fa_icon('eye' ), player
               %td= link_to fa_icon('ban' ), player, method: :delete, data: { confirm: 'Are you sure?' }
